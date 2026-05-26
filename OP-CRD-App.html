@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UR XI Las Colonias — Órdenes y Certificados</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #1a3a5c;
+    --azul-claro: #2c5282;
+    --dorado: #b7860b;
+    --dorado-claro: #d4a017;
+    --gris-claro: #f5f5f0;
+    --gris-borde: #d0cfc8;
+    --texto: #1a1a1a;
+    --blanco: #ffffff;
+    --rojo: #8b1a1a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--gris-claro);
+    color: var(--texto);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--azul);
+    color: var(--blanco);
+    padding: 0;
+    border-bottom: 4px solid var(--dorado);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .header-escudo {
+    width: 52px; height: 52px;
+    background: var(--dorado);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .header-texto h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .header-texto p {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  /* NAV TABS */
+  .nav-tabs {
+    background: var(--azul-claro);
+    border-bottom: 3px solid var(--dorado);
+  }
+  .nav-tabs-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+  .tab-btn {
+    padding: 12px 28px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.65);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -3px;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.9); }
+  .tab-btn.active {
+    color: var(--blanco);
+    border-bottom-color: var(--dorado-claro);
+    background: rgba(0,0,0,0.15);
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px 24px;
+  }
+
+  /* SECTION */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* FORM CARD */
+  .card {
+    background: var(--blanco);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .card-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--azul);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--dorado);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title span { font-size: 1.1rem; }
+
+  /* FORM GRID */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .form-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .form-full { grid-column: 1/-1; }
+
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--azul);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 1px solid var(--gris-borde);
+    border-radius: 4px;
+    padding: 9px 12px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.9rem;
+    color: var(--texto);
+    background: #fafaf7;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--azul-claro);
+    background: var(--blanco);
+  }
+  .form-group textarea { resize: vertical; min-height: 60px; }
+
+  /* ITEMS TABLE */
+  .items-section { margin-top: 20px; }
+  .items-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .items-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--azul);
+  }
+
+  table.items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  table.items-table thead tr {
+    background: var(--azul);
+    color: var(--blanco);
+  }
+  table.items-table thead th {
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  table.items-table tbody tr:nth-child(even) { background: #f9f9f4; }
+  table.items-table tbody td { padding: 6px 6px; }
+  table.items-table tbody td input,
+  table.items-table tbody td select {
+    width: 100%;
+    border: 1px solid var(--gris-borde);
+    border-radius: 3px;
+    padding: 5px 7px;
+    font-size: 0.87rem;
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--blanco);
+  }
+  table.items-table tbody td input:focus,
+  table.items-table tbody td select:focus {
+    outline: none;
+    border-color: var(--azul-claro);
+  }
+  .col-cant { width: 80px; }
+  .col-precio { width: 110px; }
+  .col-total { width: 110px; background: #f0f4f8; font-weight: 600; text-align: right; padding-right: 10px; }
+  .col-accion { width: 40px; text-align: center; }
+  .col-um { width: 80px; }
+  .col-fecha { width: 130px; }
+
+  .total-row td {
+    background: var(--azul) !important;
+    color: var(--blanco);
+    font-weight: 700;
+    padding: 10px 10px !important;
+  }
+  .total-row .total-label { text-align: right; font-size: 0.85rem; letter-spacing: 0.05em; }
+  .total-row .total-value { text-align: right; font-size: 1rem; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 20px;
+    border-radius: 4px;
+    border: none;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--azul);
+    color: var(--blanco);
+  }
+  .btn-primary:hover { background: var(--azul-claro); }
+  .btn-dorado {
+    background: var(--dorado);
+    color: var(--blanco);
+  }
+  .btn-dorado:hover { background: var(--dorado-claro); }
+  .btn-outline {
+    background: transparent;
+    color: var(--azul);
+    border: 1.5px solid var(--azul);
+  }
+  .btn-outline:hover { background: var(--azul); color: var(--blanco); }
+  .btn-danger {
+    background: transparent;
+    color: var(--rojo);
+    border: 1px solid var(--rojo);
+    padding: 4px 8px;
+    font-size: 0.78rem;
+  }
+  .btn-danger:hover { background: var(--rojo); color: var(--blanco); }
+  .btn-sm {
+    padding: 5px 12px;
+    font-size: 0.82rem;
+  }
+
+  .actions-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  /* PRINT PREVIEW */
+  .preview-container {
+    background: var(--blanco);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  .preview-toolbar {
+    background: #2d2d2d;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .preview-toolbar span { color: #aaa; font-size: 0.82rem; }
+  .preview-body {
+    padding: 0;
+  }
+
+  /* DOCUMENT STYLES (inside preview) */
+  #doc-preview {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    padding: 20mm 15mm;
+    max-width: 210mm;
+    margin: 0 auto;
+    min-height: 297mm;
+    background: white;
+  }
+  #doc-preview .doc-title {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+    color: #1a1a2e;
+  }
+  #doc-preview .doc-subtitle {
+    text-align: center;
+    font-size: 11pt;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #1a1a2e;
+  }
+  #doc-preview .doc-org {
+    text-align: center;
+    font-size: 9pt;
+    color: #555;
+    margin-bottom: 12px;
+  }
+  #doc-preview hr.doc-hr {
+    border: none;
+    border-top: 2px solid #1a3a5c;
+    margin: 8px 0 14px;
+  }
+  #doc-preview .doc-numero {
+    font-size: 13pt;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 10px;
+    color: #8b1a1a;
+  }
+  #doc-preview .doc-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 5px;
+    align-items: baseline;
+  }
+  #doc-preview .doc-row .lbl {
+    font-weight: bold;
+    min-width: 140px;
+    font-size: 9.5pt;
+  }
+  #doc-preview .doc-row .val {
+    flex: 1;
+    border-bottom: 1px solid #999;
+    padding-bottom: 1px;
+    font-size: 9.5pt;
+  }
+  #doc-preview .doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 9pt;
+  }
+  #doc-preview .doc-table th {
+    background: #1a3a5c;
+    color: white;
+    padding: 6px 8px;
+    text-align: left;
+    font-size: 8.5pt;
+  }
+  #doc-preview .doc-table td {
+    padding: 5px 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  #doc-preview .doc-table tr:nth-child(even) td { background: #f5f5f0; }
+  #doc-preview .doc-table .text-right { text-align: right; }
+  #doc-preview .doc-table .total-tr td {
+    background: #1a3a5c;
+    color: white;
+    font-weight: bold;
+    padding: 7px 8px;
+  }
+  #doc-preview .doc-footer-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px;
+  }
+  #doc-preview .doc-firma {
+    flex: 1;
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1.5px solid #333;
+    font-size: 8.5pt;
+  }
+  #doc-preview .doc-aviso {
+    margin-top: 20px;
+    border: 1.5px solid #8b1a1a;
+    padding: 8px 12px;
+    font-size: 8pt;
+    color: #8b1a1a;
+    font-style: italic;
+    border-radius: 3px;
+  }
+  #doc-preview .doc-datos-factura {
+    margin-top: 14px;
+    border: 1px solid #ddd;
+    padding: 10px 14px;
+    background: #f9f9f4;
+    border-radius: 3px;
+  }
+  #doc-preview .doc-datos-factura p { margin-bottom: 3px; font-size: 9pt; }
+  #doc-preview .doc-datos-factura strong { color: #1a3a5c; }
+
+  /* HISTORIAL */
+  .historial-list { display: flex; flex-direction: column; gap: 10px; }
+  .historial-item {
+    background: var(--blanco);
+    border: 1px solid var(--gris-borde);
+    border-radius: 5px;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.2s;
+  }
+  .historial-item:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+  .historial-info h3 { font-size: 0.95rem; font-weight: 700; color: var(--azul); }
+  .historial-info p { font-size: 0.82rem; color: #666; margin-top: 2px; }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .badge-op { background: #e8f0fe; color: #1a3a5c; }
+  .badge-crdb { background: #e6f4ea; color: #1e5c2c; }
+  .badge-crds { background: #fef3e2; color: #7a4f00; }
+  .historial-actions { display: flex; gap: 8px; align-items: center; }
+
+  .empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #888;
+  }
+  .empty-state p { font-size: 0.95rem; }
+
+  /* TIPO SELECTOR */
+  .tipo-selector {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .tipo-card {
+    flex: 1;
+    min-width: 180px;
+    border: 2px solid var(--gris-borde);
+    border-radius: 8px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--blanco);
+    text-align: center;
+  }
+  .tipo-card:hover { border-color: var(--azul-claro); }
+  .tipo-card.selected {
+    border-color: var(--azul);
+    background: #eef2f8;
+  }
+  .tipo-card .tipo-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .tipo-card .tipo-nombre { font-weight: 700; font-size: 0.88rem; color: var(--azul); }
+  .tipo-card .tipo-desc { font-size: 0.78rem; color: #777; margin-top: 3px; }
+
+  /* ALERT */
+  .alert {
+    padding: 12px 16px;
+    border-radius: 5px;
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .alert-success { background: #e6f4ea; border-left: 4px solid #2e7d32; color: #1e5c2c; }
+  .alert-error { background: #fde8e8; border-left: 4px solid var(--rojo); color: var(--rojo); }
+
+  /* PRINT */
+  @media print {
+    body > * { display: none !important; }
+    #print-area { display: block !important; }
+    #print-area #doc-preview { padding: 10mm 12mm; }
+  }
+  #print-area { display: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .form-grid.cols-3, .form-grid.cols-2 { grid-template-columns: 1fr; }
+    .tipo-selector { flex-direction: column; }
+  }
+
+  .num-badge {
+    background: var(--dorado);
+    color: white;
+    font-size: 0.78rem;
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-weight: 700;
+    margin-left: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-escudo">⚖</div>
+    <div class="header-texto">
+      <h1>Unidad Regional XI — Las Colonias</h1>
+      <p>Ministerio de Justicia y Seguridad — División Logística — Esperanza, Santa Fe</p>
+    </div>
+  </div>
+</header>
+
+<div class="nav-tabs">
+  <div class="nav-tabs-inner">
+    <button class="tab-btn active" onclick="showTab('nuevo')">✦ Nuevo Documento</button>
+    <button class="tab-btn" onclick="showTab('historial')">☰ Historial <span class="num-badge" id="historial-count">0</span></button>
+    <button class="tab-btn" onclick="showTab('proveedores')">☷ Proveedores</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- NUEVO DOCUMENTO -->
+  <section id="sec-nuevo" class="section active">
+
+    <div class="card">
+      <div class="card-title"><span>✦</span> Tipo de Documento</div>
+      <div class="tipo-selector">
+        <div class="tipo-card selected" onclick="selectTipo('OP')" id="tipo-OP">
+          <div class="tipo-icon">📋</div>
+          <div class="tipo-nombre">Orden de Provisión</div>
+          <div class="tipo-desc">Compra de bienes (Art. 49 Ley 12510)</div>
+        </div>
+        <div class="tipo-card" onclick="selectTipo('CRDB')" id="tipo-CRDB">
+          <div class="tipo-icon">📦</div>
+          <div class="tipo-nombre">CRD de Bienes</div>
+          <div class="tipo-desc">Certificado de recepción de bienes</div>
+        </div>
+        <div class="tipo-card" onclick="selectTipo('CRDS')" id="tipo-CRDS">
+          <div class="tipo-icon">🔧</div>
+          <div class="tipo-nombre">CRD de Servicios</div>
+          <div class="tipo-desc">Certificado de recepción de servicios</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="form-OP">
+      <!-- ORDEN DE PROVISIÓN -->
+      <div class="card">
+        <div class="card-title"><span>📋</span> Datos Generales — Orden de Provisión</div>
+        <div class="form-grid cols-3">
+          <div class="form-group">
+            <label>Número de Orden <span id="op-num-badge" style="background:#b7860b;color:#fff;font-size:0.65rem;padding:1px 7px;border-radius:10px;font-weight:700;letter-spacing:0.04em;vertical-align:middle">AUTO</span></label>
+            <div style="display:flex;gap:6px;align-items:center">
+              <input type="number" id="op-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1" title="Generado automáticamente. Podés modificarlo si es necesario." onchange="this.dataset.manualOverride=1;document.getElementById('op-num-badge').textContent='MANUAL';document.getElementById('op-num-badge').style.background='#8b1a1a'">
+              <button type="button" title="Restablecer numeración automática" onclick="resetNumero('OP')" style="background:transparent;border:1px solid #b7860b;color:#b7860b;border-radius:3px;padding:5px 8px;cursor:pointer;font-size:0.75rem">↺</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Fecha</label>
+            <input type="date" id="op-fecha">
+          </div>
+          <div class="form-group">
+            <label>Plazo de entrega</label>
+            <input type="text" id="op-plazo" value="7 días">
+          </div>
+        </div>
+        <div class="form-grid cols-2" style="margin-top:14px">
+          <div class="form-group">
+            <label>Proveedor</label>
+            <select id="op-proveedor" onchange="fillProveedorOP()">
+              <option value="">— Seleccionar —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Sub-unidad destino</label>
+            <input type="text" id="op-subunidad" list="op-subunidad-list" placeholder="Seleccionar o escribir..." autocomplete="off">
+            <datalist id="op-subunidad-list"></datalist>
+          </div>
+        </div>
+        <div class="form-grid cols-3" style="margin-top:14px">
+          <div class="form-group">
+            <label>Dirección proveedor</label>
+            <input type="text" id="op-direccion" placeholder="Dirección">
+          </div>
+          <div class="form-group">
+            <label>Teléfono proveedor</label>
+            <input type="text" id="op-telefono" placeholder="Teléfono">
+          </div>
+          <div class="form-group">
+            <label>E-mail proveedor</label>
+            <input type="text" id="op-email" placeholder="email@proveedor.com">
+          </div>
+        </div>
+        <div class="form-grid" style="margin-top:14px">
+          <div class="form-group">
+            <label>Nro. de pedido</label>
+            <input type="text" id="op-nropedido" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Observaciones</label>
+            <input type="text" id="op-obs" placeholder="">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="items-header">
+          <div class="card-title" style="margin-bottom:0;border:none;padding-bottom:0"><span>📦</span> Ítems a Proveer</div>
+          <button class="btn btn-outline btn-sm" onclick="addItemOP()">+ Agregar ítem</button>
+        </div>
+        <div style="overflow-x:auto;margin-top:14px">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th>Cant.</th>
+                <th style="width:50%">Descripción</th>
+                <th class="col-precio">Precio Unit. $</th>
+                <th class="col-total">Total $</th>
+                <th class="col-accion"></th>
+              </tr>
+            </thead>
+            <tbody id="op-items-body">
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="3" class="total-label">TOTAL</td>
+                <td class="total-value" id="op-total-display" style="text-align:right">$ 0,00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div style="margin-top:18px;padding:14px 16px;background:#f0f4f8;border-radius:6px;border:1px solid #cdd8e8">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <span style="font-size:0.8rem;font-weight:700;color:#1a3a5c;text-transform:uppercase;letter-spacing:0.05em">Al guardar, generar también:</span>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.88rem">
+              <input type="radio" name="op-crd-tipo" id="op-crd-bienes" value="CRDB" checked> CRD de Bienes
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.88rem">
+              <input type="radio" name="op-crd-tipo" id="op-crd-servicios" value="CRDS"> CRD de Servicios
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:0.88rem">
+              <input type="radio" name="op-crd-tipo" id="op-crd-ninguno" value="NINGUNO"> Solo la OP
+            </label>
+          </div>
+        </div>
+        <div class="actions-row" style="margin-top:12px">
+          <button class="btn btn-primary" onclick="generarDocumento('OP')">⬡ Previsualizar OP</button>
+          <button class="btn btn-dorado" onclick="guardarDocumentoOP()">💾 Guardar OP (+ CRD automático)</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="form-CRDB" style="display:none">
+      <!-- CRD BIENES -->
+      <div class="card">
+        <div class="card-title"><span>📦</span> Datos Generales — Certificado de Recepción de Bienes</div>
+        <div class="form-grid cols-3">
+          <div class="form-group">
+            <label>Número de Certificado <span id="crdb-num-badge" style="background:#b7860b;color:#fff;font-size:0.65rem;padding:1px 7px;border-radius:10px;font-weight:700;letter-spacing:0.04em;vertical-align:middle">AUTO</span></label>
+            <div style="display:flex;gap:6px;align-items:center">
+              <input type="number" id="crdb-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1" title="Generado automáticamente." onchange="this.dataset.manualOverride=1;document.getElementById('crdb-num-badge').textContent='MANUAL';document.getElementById('crdb-num-badge').style.background='#8b1a1a'">
+              <button type="button" onclick="resetNumero('CRDB')" style="background:transparent;border:1px solid #b7860b;color:#b7860b;border-radius:3px;padding:5px 8px;cursor:pointer;font-size:0.75rem">↺</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Destino</label>
+            <input type="text" id="crdb-destino" list="crdb-destino-list" placeholder="Seleccionar o escribir..." autocomplete="off">
+            <datalist id="crdb-destino-list"></datalist>
+          </div>
+          <div class="form-group">
+            <label>Móvil (si aplica)</label>
+            <input type="text" id="crdb-movil" placeholder="0">
+          </div>
+        </div>
+        <div class="form-grid cols-2" style="margin-top:14px">
+          <div class="form-group">
+            <label>Proveedor</label>
+            <select id="crdb-proveedor" onchange="fillProveedorCRDB()">
+              <option value="">— Seleccionar —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Domicilio proveedor</label>
+            <input type="text" id="crdb-domicilio" placeholder="Dirección">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="items-header">
+          <div class="card-title" style="margin-bottom:0;border:none;padding-bottom:0"><span>📦</span> Bienes Recibidos</div>
+          <button class="btn btn-outline btn-sm" onclick="addItemCRDB()">+ Agregar ítem</button>
+        </div>
+        <div style="overflow-x:auto;margin-top:14px">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th style="width:38%">Descripción</th>
+                <th class="col-um">Unidad</th>
+                <th class="col-cant">Cantidad</th>
+                <th class="col-fecha">Fecha Ord. Prov.</th>
+                <th class="col-precio">Precio Unit. $</th>
+                <th class="col-total">Total $</th>
+                <th class="col-accion"></th>
+              </tr>
+            </thead>
+            <tbody id="crdb-items-body">
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="5" class="total-label">TOTAL</td>
+                <td class="total-value" id="crdb-total-display" style="text-align:right">$ 0,00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="actions-row" style="margin-top:18px">
+          <button class="btn btn-primary" onclick="generarDocumento('CRDB')">⬡ Previsualizar e Imprimir</button>
+          <button class="btn btn-dorado" onclick="guardarDocumento('CRDB')">💾 Guardar en Historial</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="form-CRDS" style="display:none">
+      <!-- CRD SERVICIOS -->
+      <div class="card">
+        <div class="card-title"><span>🔧</span> Datos Generales — Certificado de Recepción de Servicios</div>
+        <div class="form-grid cols-3">
+          <div class="form-group">
+            <label>Número de Certificado <span id="crds-num-badge" style="background:#b7860b;color:#fff;font-size:0.65rem;padding:1px 7px;border-radius:10px;font-weight:700;letter-spacing:0.04em;vertical-align:middle">AUTO</span></label>
+            <div style="display:flex;gap:6px;align-items:center">
+              <input type="number" id="crds-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1" title="Generado automáticamente." onchange="this.dataset.manualOverride=1;document.getElementById('crds-num-badge').textContent='MANUAL';document.getElementById('crds-num-badge').style.background='#8b1a1a'">
+              <button type="button" onclick="resetNumero('CRDS')" style="background:transparent;border:1px solid #b7860b;color:#b7860b;border-radius:3px;padding:5px 8px;cursor:pointer;font-size:0.75rem">↺</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Destino</label>
+            <input type="text" id="crds-destino" list="crds-destino-list" placeholder="Seleccionar o escribir..." autocomplete="off">
+            <datalist id="crds-destino-list"></datalist>
+          </div>
+          <div class="form-group">
+            <label>Móvil (si aplica)</label>
+            <input type="text" id="crds-movil" placeholder="0">
+          </div>
+        </div>
+        <div class="form-grid cols-2" style="margin-top:14px">
+          <div class="form-group">
+            <label>Proveedor / Cooperativa</label>
+            <select id="crds-proveedor" onchange="fillProveedorCRDS()">
+              <option value="">— Seleccionar —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Domicilio proveedor</label>
+            <input type="text" id="crds-domicilio" placeholder="Dirección">
+          </div>
+        </div>
+        <div class="form-grid" style="margin-top:14px">
+          <div class="form-group">
+            <label>Observaciones</label>
+            <input type="text" id="crds-obs" placeholder="">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="items-header">
+          <div class="card-title" style="margin-bottom:0;border:none;padding-bottom:0"><span>🔧</span> Servicios Recibidos</div>
+          <button class="btn btn-outline btn-sm" onclick="addItemCRDS()">+ Agregar ítem</button>
+        </div>
+        <div style="overflow-x:auto;margin-top:14px">
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th style="width:35%">Descripción del Servicio</th>
+                <th class="col-fecha">Período desde</th>
+                <th class="col-fecha">Período hasta</th>
+                <th class="col-fecha">Fecha Ord. Prov.</th>
+                <th class="col-precio">Precio $</th>
+                <th class="col-total">Total $</th>
+                <th class="col-accion"></th>
+              </tr>
+            </thead>
+            <tbody id="crds-items-body">
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="5" class="total-label">TOTAL</td>
+                <td class="total-value" id="crds-total-display" style="text-align:right">$ 0,00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="actions-row" style="margin-top:18px">
+          <button class="btn btn-primary" onclick="generarDocumento('CRDS')">⬡ Previsualizar e Imprimir</button>
+          <button class="btn btn-dorado" onclick="guardarDocumento('CRDS')">💾 Guardar en Historial</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- HISTORIAL -->
+  <section id="sec-historial" class="section">
+    <div class="card">
+      <div class="card-title"><span>☰</span> Documentos Guardados</div>
+      <div id="historial-container">
+        <div class="empty-state"><p>📄 No hay documentos guardados aún.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVEEDORES -->
+  <section id="sec-proveedores" class="section">
+    <div class="card">
+      <div class="card-title"><span>☷</span> Listado de Proveedores</div>
+      <div style="overflow-x:auto">
+        <table class="items-table" id="prov-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Dirección</th>
+              <th>Teléfono</th>
+              <th>Email</th>
+              <th>Subunidad</th>
+            </tr>
+          </thead>
+          <tbody id="prov-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- MODAL DUAL (OP + CRD) -->
+<div id="modal-dual" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:1100;overflow-y:auto;padding:20px">
+  <div style="max-width:860px;margin:0 auto;background:#2d2d2d;border-radius:8px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.5)">
+    <div style="padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #444">
+      <span style="color:#eee;font-weight:700;font-size:1rem">📄 Documentos Generados</span>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-dorado btn-sm" onclick="imprimirDual('op')">🖨 Imprimir OP</button>
+        <button class="btn btn-dorado btn-sm" onclick="imprimirDual('crd')">🖨 Imprimir CRD</button>
+        <button class="btn btn-dorado btn-sm" onclick="imprimirDual('ambos')">🖨 Imprimir Ambos</button>
+        <button class="btn btn-sm" style="background:#555;color:white" onclick="cerrarDual()">✕ Cerrar</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:400px">
+      <div style="border-right:1px solid #444">
+        <div style="background:#1a3a5c;color:white;padding:8px 14px;font-size:0.8rem;font-weight:700;letter-spacing:0.05em">ORDEN DE PROVISIÓN</div>
+        <div id="dual-op-preview" style="background:white;padding:14mm 12mm;font-family:Arial,sans-serif;font-size:9pt;min-height:300px"></div>
+      </div>
+      <div>
+        <div id="dual-crd-label" style="background:#1e5c2c;color:white;padding:8px 14px;font-size:0.8rem;font-weight:700;letter-spacing:0.05em">CRD DE BIENES</div>
+        <div id="dual-crd-preview" style="background:white;padding:14mm 12mm;font-family:Arial,sans-serif;font-size:9pt;min-height:300px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINT AREA -->
+<div id="print-area">
+  <div id="doc-preview-print"></div>
+</div>
+
+<!-- MODAL PREVIEW -->
+<div id="modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.65);z-index:1000;overflow-y:auto;padding:20px">
+  <div style="max-width:820px;margin:0 auto;background:white;border-radius:8px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.3)">
+    <div style="background:#2d2d2d;padding:12px 18px;display:flex;justify-content:space-between;align-items:center">
+      <span style="color:#ccc;font-size:0.88rem">Vista previa del documento</span>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-dorado btn-sm" onclick="imprimirDoc()">🖨 Imprimir este</button>
+        <button class="btn btn-sm" id="btn-imprimir-ambos" onclick="imprimirAmbos()" style="background:#2e7d32;color:white;display:none">🖨 Imprimir ambos</button>
+        <button class="btn btn-sm" style="background:#555;color:white" onclick="cerrarModal()">✕ Cerrar</button>
+      </div>
+    </div>
+    <div id="doc-preview" style="font-family:Arial,sans-serif;font-size:10pt;padding:18mm 15mm;min-height:200mm;background:white">
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== DATA ====================
+const PROVEEDORES = [
+  {nombre:"A-F Electricidad", dir:"Moreno 3115 (Esperanza)", tel:"", email:"", sub:""},
+  {nombre:"Aguas Santafesinas S.A.", dir:"Ituzaingo 1501 (Santa Fe)", tel:"", email:"", sub:""},
+  {nombre:"Agustín Darío Singerling", dir:"Ceballos 394 (Esperanza)", tel:"(03496) 525030", email:"jesicametteoda@hotmail.com", sub:""},
+  {nombre:"Alisan", dir:"Urquiza 3050 (Esperanza)", tel:"(3496) 448031", email:"administracion@laredcomercialsrl.com.ar", sub:""},
+  {nombre:"Autoservicio Juan Carlos", dir:"Moreno 776 (Esperanza)", tel:"03496-422087", email:"autoserviciojuancarlos776@hotmail.com", sub:""},
+  {nombre:"Auxilio IL Moro", dir:"Berutti 818 (Esperanza)", tel:"(03496) 578890", email:"ivanmoro573@gmail.com", sub:""},
+  {nombre:"Carnes 2000", dir:"Amado Aufranc 495 (Esperanza)", tel:"-", email:"monigasser3@hotmail.com", sub:""},
+  {nombre:"Carnes El Prestigio", dir:"Rivadavia 2692 (Esperanza)", tel:"(03496) 431205", email:"", sub:""},
+  {nombre:"Carnicería Dino's", dir:"Brown y Guemes", tel:"(34696) 498838", email:"", sub:""},
+  {nombre:"Casa Fontana", dir:"San Martín 1880 (Esperanza)", tel:"(03496) 420099", email:"casafontana1910@gmail.com", sub:""},
+  {nombre:"Chocho Copias", dir:"3 de Febrero 1464 (Esperanza)", tel:"(03496) 502661", email:"chochocopias@gmail.com", sub:""},
+  {nombre:"Científica Horus", dir:"Aarón Castellanos 2845 (Esperanza)", tel:"(03496) 427095", email:"horusesperanza@gmail.com", sub:""},
+  {nombre:"Comuna de Sa Pereira", dir:"San Lorenzo 442 (Sa Pereira)", tel:"(03404) 494044", email:"comusape@yahoo.com.ar", sub:"Subcomisaria 2°"},
+  {nombre:"Comuna de San Carlos Norte", dir:"Carlos Beck Bernard 417 (SCN)", tel:"(03404) 456044", email:"comunasancarlosnorte@hotmail.com.ar", sub:"Subcomisaria 10°"},
+  {nombre:"Coop. Agua Potable Humboldt Ltda.", dir:"Av. San Martín 1628 (Humboldt)", tel:"", email:"cooperativahumboldt@gmail.com", sub:"Comisaría 5°"},
+  {nombre:"Coop. Agua Potable y Teléfono", dir:"Esperanza 31 (Progreso)", tel:"(03497) 488115", email:"copaguaprogreso@hotmail.com", sub:"Subcomisaria 5°"},
+  {nombre:"Coop. Serv. Públicos Sa Pereira Ltda.", dir:"Revol. 7 Jefes 454 (Sa Pereira)", tel:"(03404) 494046", email:"coop@pilar-sfe.com.ar", sub:"Subcomisaria 2°"},
+  {nombre:"Coop. Serv. Públicos Sarmiento Ltda.", dir:"M. Moreno 1129 (Sarmiento)", tel:"(03497) 497000", email:"cooperativa@coopsarmiento.com.ar", sub:"Subcomisaria 9°"},
+  {nombre:"Coop. Tel. y S.P. Nuevo Torino Ltda.", dir:"Zona Urbana (Nuevo Torino)", tel:"(03496) 494500", email:"cooptelefonostorino@gmail.com", sub:"Subcomisaria 13°"},
+  {nombre:"Coop. Tel. y Serv. Públicos Grutly", dir:"E. Vollenweider 288 (Grütly)", tel:"(03496) 492500", email:"coopgrutly@hotmail.com", sub:"Subcomisaria 16°"},
+  {nombre:"COPAPOS", dir:"E. Wuthrich 1500 (San Carlos Centro)", tel:"(03404) 420715", email:"copaposscc@gmail.com", sub:"Comisaría 2°"},
+  {nombre:"DL Garbe", dir:"Avda. Córdoba 2011 (Esperanza)", tel:"(03496) 501175", email:"ventas@dlgarbe.com.ar", sub:""},
+  {nombre:"Diego Daniel Garbe", dir:"Avda. Córdoba 2011 (Esperanza)", tel:"(03496) 501175", email:"ventas@dlgarbe.com.ar", sub:""},
+  {nombre:"Electricidad Colombo", dir:"Belgrano 2298 (Esperanza)", tel:"(03496) 421384", email:"administracion@electricidadcolombo.com.ar", sub:""},
+  {nombre:"Esperanza Revestimientos", dir:"A. Aufranc 1331 (Esperanza)", tel:"(03496) 422919", email:"info@esperanzarevestimientos.com.ar", sub:""},
+  {nombre:"Esperanza Servicios SAPEM", dir:"Dr. Galvez 2057 (Esperanza)", tel:"(03496) 653459", email:"esperanzagas@hotmail.com", sub:"Subcomiaría 18°"},
+  {nombre:"Farmacia Barrios", dir:"Simón de Iriondo 3043 (Esperanza)", tel:"(03496) 421567", email:"", sub:""},
+  {nombre:"Ferretería Esperanza", dir:"Simón de Iriondo 3268 (Esperanza)", tel:"(03496) 429210", email:"marcelobonfanti@yahoo.com.ar", sub:""},
+  {nombre:"Fontenla Lubricants", dir:"Moreno 3018 (Esperanza)", tel:"(03496) 461559", email:"", sub:""},
+  {nombre:"FV Electrónica", dir:"Sarmiento 2401 (Esperanza)", tel:"(03496) 420365", email:"fv-electronica@hotmail.com", sub:""},
+  {nombre:"Galcor Neumáticos y Servicios", dir:"Ruta 6 y 70 (Esperanza)", tel:"(03496) 512754", email:"ventas@galcor.com.ar", sub:""},
+  {nombre:"Gas Humoller Hnos", dir:"25 de Mayo 2262 (Esperanza)", tel:"(03496) 420757", email:"donalbertosh@gmail.com", sub:""},
+  {nombre:"Gasser María Florencia", dir:"Avda. Córdoba 1958 (Esperanza)", tel:"(03496) 401111", email:"", sub:""},
+  {nombre:"Grandes Almacenes Esperanza S.A.", dir:"Sarmiento 1931 (Esperanza)", tel:"(03496) 420330", email:"", sub:""},
+  {nombre:"Granjas Carnave S.A.", dir:"Belgrano 2804 (Esperanza)", tel:"(03496) 422002", email:"cobranzas@carnave.com.ar", sub:""},
+  {nombre:"La Red Comercial SRL", dir:"Urquiza 3050 (Esperanza)", tel:"", email:"administracion@laredcomercialsrl.com.ar", sub:""},
+  {nombre:"LC2 Motoparts", dir:"Simón de Iriondo 3597 (Esperanza)", tel:"(03496) 558700", email:"lc2motoparts@gmail.com", sub:""},
+  {nombre:"Maidana Julián Alberto", dir:"Alfonsina Storni 2536 (Esperanza)", tel:"(03496) 534396", email:"julian79maida@gmail.com", sub:""},
+  {nombre:"Metrans SRL", dir:"Padre Kreder 2395 (Esperanza)", tel:"(03496) 424901", email:"info@metrans.com.ar", sub:""},
+  {nombre:"Micolli Informática", dir:"Simón de Iriondo 3231 (Esperanza)", tel:"(03496) 444802", email:"diegomico@live.com.ar", sub:""},
+  {nombre:"Orbe Química", dir:"Pueyrredón 1449 (Esperanza)", tel:"(03496) 505333", email:"javiergalva474@gmail.com", sub:""},
+  {nombre:"Panadería La Alianza", dir:"Aarón Castellanos 2037 (Esperanza)", tel:"(03496) 420416", email:"panaderialaalianza2037@gmail.com", sub:""},
+  {nombre:"Premium Pinturería", dir:"San Martín 2503 (Esperanza)", tel:"(0342) 5117498", email:"premiumpinturerias@gmail.com", sub:""},
+  {nombre:"Proinar Materiales SRL", dir:"Berutti 1150 (Esperanza)", tel:"(03496) 420231", email:"", sub:""},
+  {nombre:"Repuestos del Valle", dir:"Aristóbulo del Valle 7055 (Santa Fe)", tel:"(0342) 4606627", email:"repuestosdelvalle@gmail.com", sub:""},
+  {nombre:"Sanitarios Esperanza", dir:"Amado Aufranc 1630 (Esperanza)", tel:"(03496) 426490", email:"sanitariosesperanza@hotmail.com", sub:""},
+  {nombre:"Valverde Claudio René", dir:"Dr. Galvez 2932 (Esperanza)", tel:"", email:"claudiovalverdepitty@gmail.com", sub:""},
+  {nombre:"Verdulería El Hormiguero", dir:"San Martín 2585 (Esperanza)", tel:"-", email:"silviabutarelli2@gmail.com", sub:""},
+  {nombre:"ADN", dir:"Aufranc 744", tel:"(03496) 423538", email:"adnseguridadindustrial@hotmail.com", sub:""},
+  {nombre:"Cantarutti Jose Maria", dir:"Rivadavia 2835", tel:"(3496) 501155", email:"refriger_jj@hotmail.com", sub:""}
+];
+
+const SUBUNIDADES = [
+  "Alcaidía y Dependencias con alojados",
+  "Alcaidía",
+  "División Logística",
+  "Subcomisaria 2°",
+  "Subcomisaria 5°",
+  "Subcomisaria 9°",
+  "Subcomisaria 10°",
+  "Subcomisaria 13°",
+  "Subcomisaria 16°",
+  "Subcomisaria 18°",
+  "Comisaría 2°",
+  "Comisaría 5°"
+];
+
+const SERVICIOS_TIPO = [
+  "Servicio de energía eléctrica",
+  "Servicio de agua potable",
+  "Servicio de gas natural",
+  "Servicio telefónico"
+];
+
+let historial = JSON.parse(localStorage.getItem('urxi_historial') || '[]');
+let tipoActivo = 'OP';
+
+// ==================== COUNTERS ====================
+// Each doc type keeps its own independent counter in localStorage
+function getNextNum(tipo) {
+  const key = 'urxi_counter_' + tipo;
+  // Compute from historial to always stay consistent
+  const usados = historial.filter(e => e.tipo === tipo).map(e => parseInt(e.data.numero)).filter(n => !isNaN(n));
+  const maxUsado = usados.length ? Math.max(...usados) : 0;
+  const stored = parseInt(localStorage.getItem(key) || '0');
+  return Math.max(maxUsado, stored) + 1;
+}
+
+function bumpCounter(tipo, numeroUsado) {
+  const key = 'urxi_counter_' + tipo;
+  const actual = parseInt(localStorage.getItem(key) || '0');
+  const nuevo = Math.max(actual, parseInt(numeroUsado) || 0);
+  localStorage.setItem(key, nuevo);
+}
+
+function resetNumero(tipo) {
+  const ids = { OP: 'op-numero', CRDB: 'crdb-numero', CRDS: 'crds-numero' };
+  const badges = { OP: 'op-num-badge', CRDB: 'crdb-num-badge', CRDS: 'crds-num-badge' };
+  const el = document.getElementById(ids[tipo]);
+  const badge = document.getElementById(badges[tipo]);
+  if (el) {
+    delete el.dataset.manualOverride;
+    el.value = getNextNum(tipo);
+  }
+  if (badge) {
+    badge.textContent = 'AUTO';
+    badge.style.background = '#b7860b';
+  }
+}
+
+function setNumeroField(tipo) {
+  const ids = { OP: 'op-numero', CRDB: 'crdb-numero', CRDS: 'crds-numero' };
+  const el = document.getElementById(ids[tipo]);
+  if (el && !el.dataset.manualOverride) {
+    el.value = getNextNum(tipo);
+  }
+}
+
+// ==================== INIT ====================
+document.addEventListener('DOMContentLoaded', () => {
+  // Set today's date
+  const hoy = new Date().toISOString().split('T')[0];
+  document.getElementById('op-fecha').value = hoy;
+
+  // Fill selects
+  fillSelect('op-proveedor');
+  fillSelect('crdb-proveedor');
+  fillSelect('crds-proveedor');
+  fillSubunidades('op-subunidad');
+  fillSubunidades('crdb-destino');
+  fillSubunidades('crds-destino');
+
+  // Fill proveedores table
+  fillProveedoresTable();
+
+  // Add initial rows
+  addItemOP();
+  addItemCRDB();
+  addItemCRDS();
+
+  // Set auto numbers
+  setNumeroField('OP');
+  setNumeroField('CRDB');
+  setNumeroField('CRDS');
+
+  // Update historial count
+  updateHistorialCount();
+  renderHistorial();
+});
+
+function fillSelect(id) {
+  const sel = document.getElementById(id);
+  PROVEEDORES.sort((a,b) => a.nombre.localeCompare(b.nombre));
+  PROVEEDORES.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.nombre;
+    opt.textContent = p.nombre;
+    sel.appendChild(opt);
+  });
+}
+
+function fillSubunidades(inputId) {
+  // Works for both <select> (legacy) and <input list="..."> (datalist)
+  const el = document.getElementById(inputId);
+  if (!el) return;
+  if (el.tagName === 'SELECT') {
+    SUBUNIDADES.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s; opt.textContent = s;
+      el.appendChild(opt);
+    });
+  } else {
+    // It's a text input with datalist
+    const listId = el.getAttribute('list');
+    const dl = document.getElementById(listId);
+    if (dl) {
+      SUBUNIDADES.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s;
+        dl.appendChild(opt);
+      });
+    }
+  }
+}
+
+function fillProveedoresTable() {
+  const tbody = document.getElementById('prov-tbody');
+  PROVEEDORES.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${p.nombre}</td><td>${p.dir}</td><td>${p.tel}</td><td><small>${p.email}</small></td><td>${p.sub}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+// ==================== TABS ====================
+function showTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('sec-' + tab).classList.add('active');
+  if (tab === 'historial') renderHistorial();
+}
+
+// ==================== TIPO SELECTOR ====================
+function selectTipo(tipo) {
+  tipoActivo = tipo;
+  document.querySelectorAll('.tipo-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('tipo-' + tipo).classList.add('selected');
+  document.getElementById('form-OP').style.display = tipo === 'OP' ? 'block' : 'none';
+  document.getElementById('form-CRDB').style.display = tipo === 'CRDB' ? 'block' : 'none';
+  document.getElementById('form-CRDS').style.display = tipo === 'CRDS' ? 'block' : 'none';
+  // Refresh auto-number when switching type
+  setNumeroField(tipo);
+}
+
+// ==================== PROVEEDORES AUTO-FILL ====================
+function getProveedor(nombre) {
+  return PROVEEDORES.find(p => p.nombre === nombre) || {};
+}
+
+function fillProveedorOP() {
+  const p = getProveedor(document.getElementById('op-proveedor').value);
+  document.getElementById('op-direccion').value = p.dir || '';
+  document.getElementById('op-telefono').value = p.tel || '';
+  document.getElementById('op-email').value = p.email || '';
+}
+
+function fillProveedorCRDB() {
+  const p = getProveedor(document.getElementById('crdb-proveedor').value);
+  document.getElementById('crdb-domicilio').value = p.dir || '';
+}
+
+function fillProveedorCRDS() {
+  const p = getProveedor(document.getElementById('crds-proveedor').value);
+  document.getElementById('crds-domicilio').value = p.dir || '';
+}
+
+// ==================== ITEMS OP ====================
+let opItemCount = 0;
+
+function addItemOP() {
+  opItemCount++;
+  const id = opItemCount;
+  const tbody = document.getElementById('op-items-body');
+  const tr = document.createElement('tr');
+  tr.id = 'op-row-' + id;
+  tr.innerHTML = `
+    <td class="col-cant"><input type="number" min="0" step="any" value="1" onchange="calcOP()" oninput="calcOP()"></td>
+    <td><input type="text" placeholder="Descripción del ítem"></td>
+    <td class="col-precio"><input type="number" min="0" step="any" value="0" onchange="calcOP()" oninput="calcOP()"></td>
+    <td class="col-total" id="op-sub-${id}">$ 0,00</td>
+    <td class="col-accion"><button class="btn btn-danger" onclick="removeRow('op-row-${id}', calcOP)">✕</button></td>
+  `;
+  tbody.appendChild(tr);
+  calcOP();
+}
+
+function calcOP() {
+  let total = 0;
+  document.querySelectorAll('#op-items-body tr').forEach(tr => {
+    const inputs = tr.querySelectorAll('input[type=number]');
+    if (inputs.length >= 2) {
+      const cant = parseFloat(inputs[0].value) || 0;
+      const precio = parseFloat(inputs[1].value) || 0;
+      const sub = cant * precio;
+      total += sub;
+      const subId = tr.id.replace('op-row-', 'op-sub-');
+      const cell = document.getElementById(subId);
+      if (cell) cell.textContent = formatPeso(sub);
+    }
+  });
+  document.getElementById('op-total-display').textContent = formatPeso(total);
+}
+
+// ==================== ITEMS CRDB ====================
+let crdbItemCount = 0;
+
+function addItemCRDB() {
+  crdbItemCount++;
+  const id = crdbItemCount;
+  const hoy = new Date().toISOString().split('T')[0];
+  const tbody = document.getElementById('crdb-items-body');
+  const tr = document.createElement('tr');
+  tr.id = 'crdb-row-' + id;
+  tr.innerHTML = `
+    <td><input type="text" placeholder="Descripción"></td>
+    <td class="col-um"><input type="text" value="un" placeholder="un/kg"></td>
+    <td class="col-cant"><input type="number" min="0" step="any" value="1" onchange="calcCRDB()" oninput="calcCRDB()"></td>
+    <td class="col-fecha"><input type="date" value="${hoy}"></td>
+    <td class="col-precio"><input type="number" min="0" step="any" value="0" onchange="calcCRDB()" oninput="calcCRDB()"></td>
+    <td class="col-total" id="crdb-sub-${id}">$ 0,00</td>
+    <td class="col-accion"><button class="btn btn-danger" onclick="removeRow('crdb-row-${id}', calcCRDB)">✕</button></td>
+  `;
+  tbody.appendChild(tr);
+  calcCRDB();
+}
+
+function calcCRDB() {
+  let total = 0;
+  document.querySelectorAll('#crdb-items-body tr').forEach(tr => {
+    const nums = tr.querySelectorAll('input[type=number]');
+    if (nums.length >= 2) {
+      const cant = parseFloat(nums[0].value) || 0;
+      const precio = parseFloat(nums[1].value) || 0;
+      const sub = cant * precio;
+      total += sub;
+      const cell = document.getElementById(tr.id.replace('crdb-row-', 'crdb-sub-'));
+      if (cell) cell.textContent = formatPeso(sub);
+    }
+  });
+  document.getElementById('crdb-total-display').textContent = formatPeso(total);
+}
+
+// ==================== ITEMS CRDS ====================
+let crdsItemCount = 0;
+
+function addItemCRDS() {
+  crdsItemCount++;
+  const id = crdsItemCount;
+  const hoy = new Date().toISOString().split('T')[0];
+  const tbody = document.getElementById('crds-items-body');
+  const tr = document.createElement('tr');
+  tr.id = 'crds-row-' + id;
+  tr.innerHTML = `
+    <td>
+      <select style="width:100%;border:1px solid #ddd;border-radius:3px;padding:5px 7px;font-size:0.87rem">
+        ${SERVICIOS_TIPO.map(s=>`<option>${s}</option>`).join('')}
+        <option value="otro">— Otro —</option>
+      </select>
+    </td>
+    <td class="col-fecha"><input type="date" value="${hoy.slice(0,7)+'-01'}"></td>
+    <td class="col-fecha"><input type="date" value="${hoy}"></td>
+    <td class="col-fecha"><input type="date" value="${hoy}"></td>
+    <td class="col-precio"><input type="number" min="0" step="any" value="0" onchange="calcCRDS()" oninput="calcCRDS()"></td>
+    <td class="col-total" id="crds-sub-${id}">$ 0,00</td>
+    <td class="col-accion"><button class="btn btn-danger" onclick="removeRow('crds-row-${id}', calcCRDS)">✕</button></td>
+  `;
+  tbody.appendChild(tr);
+  calcCRDS();
+}
+
+function calcCRDS() {
+  let total = 0;
+  document.querySelectorAll('#crds-items-body tr').forEach(tr => {
+    const num = tr.querySelector('input[type=number]');
+    if (num) {
+      const precio = parseFloat(num.value) || 0;
+      total += precio;
+      const cell = document.getElementById(tr.id.replace('crds-row-', 'crds-sub-'));
+      if (cell) cell.textContent = formatPeso(precio);
+    }
+  });
+  document.getElementById('crds-total-display').textContent = formatPeso(total);
+}
+
+// ==================== HELPERS ====================
+function removeRow(rowId, recalc) {
+  const row = document.getElementById(rowId);
+  if (row) row.remove();
+  recalc();
+}
+
+function formatPeso(n) {
+  return '$ ' + n.toLocaleString('es-AR', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+
+function formatFecha(str) {
+  if (!str) return '';
+  const [y,m,d] = str.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+function numeroALetras(n) {
+  // Basic implementation for display
+  const entero = Math.floor(n);
+  const dec = Math.round((n - entero) * 100);
+  const miles = Math.floor(entero / 1000);
+  const resto = entero % 1000;
+  let resultado = '';
+  if (miles > 0) resultado += miles + '.000';
+  if (miles > 0 && resto > 0) resultado += ' ';
+  if (resto > 0) resultado += resto;
+  if (miles === 0 && resto === 0) resultado = '0';
+  return `PESOS ${resultado.replace(/\B(?=(\d{3})+(?!\d))/g, '.')} ${dec > 0 ? dec + '/100' : '00/100'}`;
+}
+
+// ==================== GENERATE DOC ====================
+function collectDataOP() {
+  const items = [];
+  let total = 0;
+  document.querySelectorAll('#op-items-body tr').forEach(tr => {
+    const inputs = tr.querySelectorAll('input');
+    if (inputs.length >= 3) {
+      const cant = parseFloat(inputs[0].value) || 0;
+      const desc = inputs[1].value;
+      const precio = parseFloat(inputs[2].value) || 0;
+      const sub = cant * precio;
+      total += sub;
+      if (desc) items.push({cant, desc, precio, sub});
+    }
+  });
+  return {
+    numero: document.getElementById('op-numero').value,
+    fecha: document.getElementById('op-fecha').value,
+    plazo: document.getElementById('op-plazo').value,
+    proveedor: document.getElementById('op-proveedor').value,
+    direccion: document.getElementById('op-direccion').value,
+    telefono: document.getElementById('op-telefono').value,
+    email: document.getElementById('op-email').value,
+    subunidad: document.getElementById('op-subunidad').value,
+    nropedido: document.getElementById('op-nropedido').value,
+    obs: document.getElementById('op-obs').value,
+    items, total
+  };
+}
+
+function collectDataCRDB() {
+  const items = [];
+  let total = 0;
+  document.querySelectorAll('#crdb-items-body tr').forEach(tr => {
+    const inputs = tr.querySelectorAll('input');
+    if (inputs.length >= 4) {
+      const desc = inputs[0].value;
+      const um = inputs[1].value;
+      const cant = parseFloat(inputs[2].value) || 0;
+      const fecha = inputs[3].value;
+      const precio = parseFloat(inputs[4] ? inputs[4].value : 0) || 0;
+      const sub = cant * precio;
+      total += sub;
+      if (desc) items.push({desc, um, cant, fecha, precio, sub});
+    }
+  });
+  return {
+    numero: document.getElementById('crdb-numero').value,
+    destino: document.getElementById('crdb-destino').value,
+    movil: document.getElementById('crdb-movil').value,
+    proveedor: document.getElementById('crdb-proveedor').value,
+    domicilio: document.getElementById('crdb-domicilio').value,
+    items, total
+  };
+}
+
+function collectDataCRDS() {
+  const items = [];
+  let total = 0;
+  document.querySelectorAll('#crds-items-body tr').forEach(tr => {
+    const sel = tr.querySelector('select');
+    const dates = tr.querySelectorAll('input[type=date]');
+    const num = tr.querySelector('input[type=number]');
+    if (sel && dates.length >= 3 && num) {
+      const desc = sel.value;
+      const desde = dates[0].value;
+      const hasta = dates[1].value;
+      const fechaop = dates[2].value;
+      const precio = parseFloat(num.value) || 0;
+      total += precio;
+      if (precio > 0 || desc) items.push({desc, desde, hasta, fechaop, precio});
+    }
+  });
+  return {
+    numero: document.getElementById('crds-numero').value,
+    destino: document.getElementById('crds-destino').value,
+    movil: document.getElementById('crds-movil').value,
+    proveedor: document.getElementById('crds-proveedor').value,
+    domicilio: document.getElementById('crds-domicilio').value,
+    obs: document.getElementById('crds-obs').value,
+    items, total
+  };
+}
+
+function buildHTML_OP(d) {
+  const rows = d.items.map(i => `
+    <tr>
+      <td class="text-right">${i.cant}</td>
+      <td>${i.desc}</td>
+      <td class="text-right">${formatPeso(i.precio)}</td>
+      <td class="text-right">${formatPeso(i.sub)}</td>
+    </tr>
+  `).join('');
+
+  return `
+    <div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:13pt;font-weight:bold;text-transform:uppercase;letter-spacing:2px;color:#1a3a5c">Orden de Provisión</div>
+      <div style="font-size:9pt;color:#555;margin-top:3px">Compras por Habilitación según Art. 49 Ley 12510</div>
+      <div style="font-size:9pt;color:#555">Unidad Regional XI - Las Colonias | San Martín 2455 - Esperanza</div>
+      <hr style="border:none;border-top:2px solid #1a3a5c;margin:10px 0 6px">
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px">
+      <div style="font-size:9.5pt"><b>Lugar y fecha:</b> Esperanza, ${formatFecha(d.fecha)}</div>
+      <div style="font-size:13pt;font-weight:bold;color:#8b1a1a">N° ${d.numero}</div>
+    </div>
+    <table style="width:100%;font-size:9.5pt;margin-bottom:10px;border-collapse:collapse">
+      <tr><td style="padding:3px 0;width:140px"><b>Señor/es:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.proveedor}</td></tr>
+      <tr><td style="padding:3px 0"><b>Dirección:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.direccion}</td></tr>
+      <tr><td style="padding:3px 0"><b>Teléfono:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.telefono}</td></tr>
+      <tr><td style="padding:3px 0"><b>E-mail:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.email}</td></tr>
+    </table>
+    <p style="font-size:9pt;margin-bottom:10px;font-style:italic">De acuerdo a los términos de su oferta sírvase entregar libre de todo gasto, en el término de ${d.plazo} los ítems que a continuación se detallan:</p>
+    <table style="width:100%;border-collapse:collapse;font-size:9pt;margin-bottom:14px">
+      <thead>
+        <tr style="background:#1a3a5c;color:white">
+          <th style="padding:6px 8px;text-align:right;width:60px">Cant.</th>
+          <th style="padding:6px 8px;text-align:left">Descripción</th>
+          <th style="padding:6px 8px;text-align:right;width:100px">Precio Unit.</th>
+          <th style="padding:6px 8px;text-align:right;width:100px">Total</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+      <tfoot>
+        <tr style="background:#1a3a5c;color:white">
+          <td colspan="3" style="padding:7px 8px;text-align:right;font-weight:bold;font-size:8.5pt;letter-spacing:1px">TOTAL</td>
+          <td style="padding:7px 8px;text-align:right;font-weight:bold">${formatPeso(d.total)}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div style="border:1px solid #ddd;padding:10px 14px;background:#f9f9f4;margin-bottom:10px;font-size:9pt">
+      <p><b>Plazo de Pago:</b> Contado / Cuenta Corriente</p>
+      <p style="margin-top:6px"><b>Datos para facturar:</b></p>
+      <p style="margin-top:3px">Organismo: Ministerio de Justicia y Seguridad - U.R.XI - Las Colonias</p>
+      <p>Domicilio: San Martín 2455 - Esperanza</p>
+      <p>CUIT: 30-99901844-7 &nbsp;|&nbsp; <b>IVA Exento</b></p>
+      <p style="font-style:italic;color:#555;margin-top:4px;font-size:8.5pt">Cítese en la factura el número de la presente orden de provisión. Incluir monto en letras.</p>
+    </div>
+    <div style="font-size:9pt;margin-bottom:6px">
+      <p><b>Unidad solicitante:</b> División Logística &nbsp;|&nbsp; <b>Sub unidad:</b> ${d.subunidad}</p>
+      ${d.nropedido ? `<p><b>Nro de pedido:</b> ${d.nropedido}</p>` : ''}
+      ${d.obs ? `<p><b>Obs.:</b> ${d.obs}</p>` : ''}
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:28px">
+      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;min-width:180px;font-size:8.5pt">
+        Firma y sello<br>U.R. XI — Las Colonias
+      </div>
+    </div>
+    <div style="margin-top:16px;border:1.5px solid #8b1a1a;padding:8px 12px;font-size:8pt;color:#8b1a1a;font-style:italic;border-radius:3px">
+      "Bajo ningún concepto se proveerá mercadería y/o servicios sin la correspondiente Orden de Provisión. Caso contrario la Unidad Regional XI - Dpto Las Colonias no reconocerá deuda alguna"
+    </div>
+  `;
+}
+
+function buildHTML_CRDB(d) {
+  const rows = d.items.map(i => `
+    <tr>
+      <td>${i.desc}</td>
+      <td>${i.um}</td>
+      <td class="text-right">${i.cant}</td>
+      <td>${formatFecha(i.fecha)}</td>
+      <td class="text-right">${formatPeso(i.precio)}</td>
+      <td class="text-right">${formatPeso(i.sub)}</td>
+    </tr>
+  `).join('');
+
+  return `
+    <div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:13pt;font-weight:bold;text-transform:uppercase;letter-spacing:2px;color:#1a3a5c">Certificado de Recepción Definitiva</div>
+      <div style="font-size:11pt;font-weight:bold;color:#1a3a5c">DE BIENES</div>
+      <hr style="border:none;border-top:2px solid #1a3a5c;margin:10px 0 6px">
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+      <div style="font-size:13pt;font-weight:bold;color:#8b1a1a">N° ${d.numero}</div>
+    </div>
+    <table style="width:100%;font-size:9.5pt;margin-bottom:10px;border-collapse:collapse">
+      <tr><td style="padding:3px 0;width:200px"><b>Jurisdicción o entidad:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">Ministerio de Justicia y Seguridad</td></tr>
+      <tr><td style="padding:3px 0"><b>Unidad de organización:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">Unidad Regional XI - Las Colonias</td></tr>
+      <tr><td style="padding:3px 0"><b>Organismo receptor:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">División Logística</td></tr>
+      <tr><td style="padding:3px 0"><b>Destino:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.destino}</td></tr>
+      <tr><td style="padding:3px 0"><b>Móvil:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.movil || '0'} &nbsp;&nbsp;&nbsp;&nbsp; <b>Odómetro:</b></td></tr>
+      <tr><td style="padding:3px 0"><b>Proveedor:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.proveedor} &nbsp;&nbsp; <b>Domicilio:</b> ${d.domicilio}</td></tr>
+      <tr><td style="padding:3px 0"><b>Procedimiento de contratación:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">Art. 49 Ley 12510</td></tr>
+    </table>
+    <p style="font-weight:bold;font-size:10pt;margin-bottom:8px;color:#1a3a5c">Certificado de bienes</p>
+    <table style="width:100%;border-collapse:collapse;font-size:9pt;margin-bottom:14px">
+      <thead>
+        <tr style="background:#1a3a5c;color:white">
+          <th style="padding:6px 8px;text-align:left">Descripción</th>
+          <th style="padding:6px 8px;text-align:center;width:60px">Unidad</th>
+          <th style="padding:6px 8px;text-align:right;width:65px">Cantidad</th>
+          <th style="padding:6px 8px;text-align:center;width:100px">Fecha Or. Prov.</th>
+          <th style="padding:6px 8px;text-align:right;width:90px">Precio Unit.</th>
+          <th style="padding:6px 8px;text-align:right;width:90px">Total</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+      <tfoot>
+        <tr style="background:#1a3a5c;color:white">
+          <td colspan="5" style="padding:7px 8px;text-align:right;font-weight:bold;font-size:8.5pt;letter-spacing:1px">TOTAL</td>
+          <td style="padding:7px 8px;text-align:right;font-weight:bold">${formatPeso(d.total)}</td>
+        </tr>
+      </tfoot>
+    </table>
+    <div style="display:flex;justify-content:space-between;margin-top:40px;gap:20px">
+      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Firma y sello del Proveedor</div>
+      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Firma y sello<br>Receptor del Organismo</div>
+      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Autorización<br>U.R. XI — Las Colonias</div>
+    </div>
+  `;
+}
+
+function buildHTML_CRDS(d) {
+  const rows = d.items.map(i => `
+    <tr>
+      <td>${i.desc}</td>
+      <td style="text-align:center">${formatFecha(i.desde)}</td>
+      <td style="text-align:center">${formatFecha(i.hasta)}</td>
+      <td style="text-align:center">${formatFecha(i.fechaop)}</td>
+      <td style="text-align:right">${formatPeso(i.precio)}</td>
+      <td style="text-align:right">${formatPeso(i.precio)}</td>
+    </tr>
+  `).join('');
+
+  return `
+    <div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:13pt;font-weight:bold;text-transform:uppercase;letter-spacing:2px;color:#1a3a5c">Certificado de Recepción Definitiva</div>
+      <div style="font-size:11pt;font-weight:bold;color:#1a3a5c">DE SERVICIOS</div>
+      <hr style="border:none;border-top:2px solid #1a3a5c;margin:10px 0 6px">
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+      <div style="font-size:13pt;font-weight:bold;color:#8b1a1a">N° ${d.numero}</div>
+    </div>
+    <table style="width:100%;font-size:9.5pt;margin-bottom:10px;border-collapse:collapse">
+      <tr><td style="padding:3px 0;width:200px"><b>Jurisdicción o entidad:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">Ministerio de Justicia y Seguridad</td></tr>
+      <tr><td style="padding:3px 0"><b>Unidad de organización:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">Unidad Regional XI - Las Colonias</td></tr>
+      <tr><td style="padding:3px 0"><b>Organismo receptor:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">División Logística</td></tr>
+      <tr><td style="padding:3px 0"><b>Destino:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.destino}</td></tr>
+      <tr><td style="padding:3px 0"><b>Móvil:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.movil || '0'} &nbsp;&nbsp;&nbsp;&nbsp; <b>Odómetro:</b></td></tr>
+      <tr><td style="padding:3px 0"><b>Proveedor:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">${d.proveedor} &nbsp;&nbsp; <b>Domicilio:</b> ${d.domicilio}</td></tr>
+      <tr><td style="padding:3px 0"><b>Procedimiento de contratación:</b></td><td style="border-bottom:1px solid #999;padding:3px 5px">Art. 49 Ley 12510</td></tr>
+    </table>
+    <p style="font-weight:bold;font-size:10pt;margin-bottom:8px;color:#1a3a5c">Certificado de servicios</p>
+    <table style="width:100%;border-collapse:collapse;font-size:9pt;margin-bottom:14px">
+      <thead>
+        <tr style="background:#1a3a5c;color:white">
+          <th style="padding:6px 8px;text-align:left">Descripción</th>
+          <th style="padding:6px 8px;text-align:center;width:90px">Período desde</th>
+          <th style="padding:6px 8px;text-align:center;width:90px">Período hasta</th>
+          <th style="padding:6px 8px;text-align:center;width:100px">Fecha Ord. Prov.</th>
+          <th style="padding:6px 8px;text-align:right;width:90px">Precio</th>
+          <th style="padding:6px 8px;text-align:right;width:90px">Total</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+      <tfoot>
+        <tr style="background:#1a3a5c;color:white">
+          <td colspan="5" style="padding:7px 8px;text-align:right;font-weight:bold;font-size:8.5pt;letter-spacing:1px">TOTAL</td>
+          <td style="padding:7px 8px;text-align:right;font-weight:bold">${formatPeso(d.total)}</td>
+        </tr>
+      </tfoot>
+    </table>
+    ${d.obs ? `<p style="font-size:9pt"><b>Observaciones:</b> ${d.obs}</p>` : ''}
+    <div style="display:flex;justify-content:space-between;margin-top:40px;gap:20px">
+      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Firma y sello del Proveedor</div>
+      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Firma y sello<br>Receptor del Organismo</div>
+      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Autorización<br>U.R. XI — Las Colonias</div>
+    </div>
+  `;
+}
+
+function generarDocumento(tipo) {
+  let html = '';
+  if (tipo === 'OP') html = buildHTML_OP(collectDataOP());
+  else if (tipo === 'CRDB') html = buildHTML_CRDB(collectDataCRDB());
+  else html = buildHTML_CRDS(collectDataCRDS());
+
+  document.getElementById('doc-preview').innerHTML = html;
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  const btnAmbos = document.getElementById('btn-imprimir-ambos');
+  if (btnAmbos) btnAmbos.style.display = 'none';
+}
+
+function cerrarModal() {
+  document.getElementById('modal-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function imprimirDoc() {
+  // Print the currently visible pane (handles tabbed OP/CRD preview)
+  const opPane = document.getElementById('prev-pane-op');
+  const crdPane = document.getElementById('prev-pane-crd');
+  let contenido = '';
+  if (opPane && crdPane) {
+    // tabbed mode: print whichever tab is visible
+    contenido = opPane.style.display !== 'none' ? opPane.innerHTML : crdPane.innerHTML;
+  } else {
+    contenido = document.getElementById('doc-preview').innerHTML;
+  }
+  const ventana = window.open('', '_blank', 'width=900,height=700');
+  ventana.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Documento</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 10pt; padding: 15mm; }
+    table { border-collapse: collapse; }
+    @page { margin: 10mm; }
+  </style></head><body>${contenido}</body></html>`);
+  ventana.document.close();
+  ventana.focus();
+  setTimeout(() => ventana.print(), 500);
+}
+
+function imprimirAmbos() {
+  // Print OP and CRD together on separate pages
+  const opPane = document.getElementById('prev-pane-op');
+  const crdPane = document.getElementById('prev-pane-crd');
+  if (!opPane || !crdPane) { imprimirDoc(); return; }
+  const contenido = opPane.innerHTML +
+    '<div style="page-break-before:always"></div>' +
+    crdPane.innerHTML;
+  const ventana = window.open('', '_blank', 'width=900,height=700');
+  ventana.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Documentos</title>
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 10pt; padding: 15mm; }
+    table { border-collapse: collapse; }
+    @page { margin: 10mm; }
+  </style></head><body>${contenido}</body></html>`);
+  ventana.document.close();
+  ventana.focus();
+  setTimeout(() => ventana.print(), 500);
+}
+
+// ==================== HISTORIAL ====================
+
+// Save a single entry and advance its counter
+function _saveEntry(tipo, data) {
+  const labels = { OP: 'Orden de Provisión', CRDB: 'CRD de Bienes', CRDS: 'CRD de Servicios' };
+  const entry = {
+    id: Date.now() + Math.random(), // avoid collision when saving two at once
+    tipo,
+    label: `${labels[tipo]} N° ${data.numero}`,
+    data,
+    fecha: new Date().toLocaleDateString('es-AR'),
+    proveedor: data.proveedor,
+    total: data.total
+  };
+  historial.unshift(entry);
+  bumpCounter(tipo, data.numero);
+  return entry;
+}
+
+// Build CRD data object from OP data (no DOM needed)
+function buildCRDDataFromOP(opData, crdTipo) {
+  const crdNum = getNextNum(crdTipo);
+  const hoy = new Date().toISOString().split('T')[0];
+
+  if (crdTipo === 'CRDB') {
+    // Map OP items → CRD Bienes items
+    const items = opData.items.map(i => ({
+      desc: i.desc,
+      um: 'un',
+      cant: i.cant,
+      fecha: opData.fecha,   // fecha de la OP como fecha de orden de provisión
+      precio: i.precio,
+      sub: i.sub
+    }));
+    return {
+      numero: String(crdNum),
+      destino: opData.subunidad,
+      movil: '',
+      proveedor: opData.proveedor,
+      domicilio: opData.direccion,
+      items,
+      total: opData.total,
+      _opNumero: opData.numero  // link back
+    };
+  } else {
+    // CRD Servicios — one row per OP item, period defaults to month of OP
+    const mesInicio = opData.fecha ? opData.fecha.slice(0,7) + '-01' : hoy;
+    const items = opData.items.map(i => ({
+      desc: i.desc,
+      desde: mesInicio,
+      hasta: opData.fecha || hoy,
+      fechaop: opData.fecha || hoy,
+      precio: i.sub   // total por ítem como precio del servicio
+    }));
+    return {
+      numero: String(crdNum),
+      destino: opData.subunidad,
+      movil: '',
+      proveedor: opData.proveedor,
+      domicilio: opData.direccion,
+      obs: '',
+      items,
+      total: opData.total,
+      _opNumero: opData.numero
+    };
+  }
+}
+
+// Save OP and auto-generate linked CRD
+function guardarDocumentoOP() {
+  const opData = collectDataOP();
+  if (!opData.proveedor) { alert('Por favor seleccioná un proveedor antes de guardar.'); return; }
+
+  const crdTipo = document.querySelector('input[name="op-crd-tipo"]:checked').value;
+
+  // Save OP
+  const opEntry = _saveEntry('OP', opData);
+
+  // Advance OP counter in DOM
+  const opEl = document.getElementById('op-numero');
+  if (opEl) { delete opEl.dataset.manualOverride; opEl.value = getNextNum('OP'); }
+
+  let crdEntry = null;
+
+  if (crdTipo !== 'NINGUNO') {
+    const crdData = buildCRDDataFromOP(opData, crdTipo);
+    crdEntry = _saveEntry(crdTipo, crdData);
+
+    // Mark the OP entry with its linked CRD id
+    opEntry.linkedCRD = crdEntry.id;
+    crdEntry.linkedOP = opEntry.id;
+
+    // Advance CRD counter in DOM
+    const ids = { CRDB: 'crdb-numero', CRDS: 'crds-numero' };
+    const crdEl = document.getElementById(ids[crdTipo]);
+    if (crdEl) { delete crdEl.dataset.manualOverride; crdEl.value = getNextNum(crdTipo); }
+  }
+
+  localStorage.setItem('urxi_historial', JSON.stringify(historial));
+  updateHistorialCount();
+  renderHistorial();
+
+  // Show preview of both documents
+  mostrarPreviewOpYCrd(opData, crdTipo !== 'NINGUNO' ? { tipo: crdTipo, data: crdTipo === 'CRDB' ? buildCRDDataFromOP(opData, 'CRDB') : buildCRDDataFromOP(opData, 'CRDS') } : null, crdTipo);
+}
+
+// Save standalone CRD or OP (from their own forms)
+function guardarDocumento(tipo) {
+  let data;
+  if (tipo === 'OP') { data = collectDataOP(); }
+  else if (tipo === 'CRDB') { data = collectDataCRDB(); }
+  else { data = collectDataCRDS(); }
+
+  if (!data.proveedor) { alert('Por favor seleccioná un proveedor antes de guardar.'); return; }
+
+  _saveEntry(tipo, data);
+  localStorage.setItem('urxi_historial', JSON.stringify(historial));
+
+  const ids = { OP: 'op-numero', CRDB: 'crdb-numero', CRDS: 'crds-numero' };
+  const el = document.getElementById(ids[tipo]);
+  if (el) { delete el.dataset.manualOverride; el.value = getNextNum(tipo); }
+
+  updateHistorialCount();
+  renderHistorial();
+  alert('✔ Documento guardado. Próximo número asignado automáticamente.');
+}
+
+// Show combined OP + CRD preview modal
+function mostrarPreviewOpYCrd(opData, crdObj, crdTipo) {
+  let htmlOP = buildHTML_OP(opData);
+  let htmlCRD = '';
+
+  if (crdObj && crdTipo !== 'NINGUNO') {
+    const crdData = buildCRDDataFromOP(opData, crdTipo);
+    htmlCRD = crdTipo === 'CRDB' ? buildHTML_CRDB(crdData) : buildHTML_CRDS(crdData);
+  }
+
+  const preview = document.getElementById('doc-preview');
+
+  if (htmlCRD) {
+    // Show tabs for OP / CRD
+    preview.innerHTML = `
+      <div style="display:flex;gap:0;border-bottom:2px solid #1a3a5c;margin-bottom:18px">
+        <button id="prev-tab-op" onclick="switchPreviewTab('op')"
+          style="padding:8px 22px;border:none;background:#1a3a5c;color:#fff;font-weight:700;cursor:pointer;font-size:0.88rem">
+          📋 Orden de Provisión N° ${opData.numero}
+        </button>
+        <button id="prev-tab-crd" onclick="switchPreviewTab('crd')"
+          style="padding:8px 22px;border:none;background:#e8f0fe;color:#1a3a5c;font-weight:700;cursor:pointer;font-size:0.88rem">
+          ${crdTipo === 'CRDB' ? '📦' : '🔧'} CRD ${crdTipo === 'CRDB' ? 'Bienes' : 'Servicios'} N° ${buildCRDDataFromOP(opData, crdTipo).numero - 1 || buildCRDDataFromOP(opData,crdTipo).numero}
+        </button>
+      </div>
+      <div id="prev-pane-op">${htmlOP}</div>
+      <div id="prev-pane-crd" style="display:none">${htmlCRD}</div>
+    `;
+    // Fix CRD tab numero display
+    const crdNum = getNextNum(crdTipo) - 1;
+    document.getElementById('prev-tab-crd').textContent = (crdTipo === 'CRDB' ? '📦' : '🔧') + ` CRD ${crdTipo === 'CRDB' ? 'Bienes' : 'Servicios'} N° ${crdNum}`;
+  } else {
+    preview.innerHTML = htmlOP;
+  }
+
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  // Show "imprimir ambos" only when both OP and CRD are present
+  const btnAmbos = document.getElementById('btn-imprimir-ambos');
+  if (btnAmbos) btnAmbos.style.display = htmlCRD ? 'inline-flex' : 'none';
+}
+
+function switchPreviewTab(tab) {
+  const opPane = document.getElementById('prev-pane-op');
+  const crdPane = document.getElementById('prev-pane-crd');
+  const opBtn = document.getElementById('prev-tab-op');
+  const crdBtn = document.getElementById('prev-tab-crd');
+  if (!opPane) return;
+  if (tab === 'op') {
+    opPane.style.display = ''; crdPane.style.display = 'none';
+    opBtn.style.background = '#1a3a5c'; opBtn.style.color = '#fff';
+    crdBtn.style.background = '#e8f0fe'; crdBtn.style.color = '#1a3a5c';
+  } else {
+    opPane.style.display = 'none'; crdPane.style.display = '';
+    crdBtn.style.background = '#1a3a5c'; crdBtn.style.color = '#fff';
+    opBtn.style.background = '#e8f0fe'; opBtn.style.color = '#1a3a5c';
+  }
+}
+
+function updateHistorialCount() {
+  document.getElementById('historial-count').textContent = historial.length;
+}
+
+function renderHistorial() {
+  const c = document.getElementById('historial-container');
+  if (historial.length === 0) {
+    c.innerHTML = '<div class="empty-state"><p>📄 No hay documentos guardados aún.</p></div>';
+    return;
+  }
+  c.innerHTML = '<div class="historial-list">' + historial.map(e => {
+    const linkedBadge = e.linkedCRD
+      ? `<span style="background:#2e7d32;color:#fff;font-size:0.65rem;padding:2px 8px;border-radius:10px;margin-left:6px">+ CRD auto</span>`
+      : (e.linkedOP ? `<span style="background:#555;color:#fff;font-size:0.65rem;padding:2px 8px;border-radius:10px;margin-left:6px">de OP N° ${historial.find(x=>x.id===e.linkedOP)?.data?.numero||'?'}</span>` : '');
+    return `
+    <div class="historial-item">
+      <div class="historial-info">
+        <h3>${e.label} <span class="badge badge-${e.tipo.toLowerCase()}">${e.tipo}</span>${linkedBadge}</h3>
+        <p>${e.proveedor || '—'} &nbsp;|&nbsp; ${formatPeso(e.total)} &nbsp;|&nbsp; Guardado: ${e.fecha}</p>
+      </div>
+      <div class="historial-actions">
+        <button class="btn btn-outline btn-sm" onclick="reimprimir(${e.id})">🖨 Imprimir</button>
+        <button class="btn btn-danger" onclick="eliminarDoc(${e.id})">✕</button>
+      </div>
+    </div>`;
+  }).join('') + '</div>';
+}
+
+function reimprimir(id) {
+  const entry = historial.find(e => e.id === id);
+  if (!entry) return;
+  // If this is an OP with a linked CRD, show tabbed view
+  if (entry.tipo === 'OP' && entry.linkedCRD) {
+    const crdEntry = historial.find(e => e.id === entry.linkedCRD);
+    if (crdEntry) {
+      const htmlOP = buildHTML_OP(entry.data);
+      const htmlCRD = crdEntry.tipo === 'CRDB' ? buildHTML_CRDB(crdEntry.data) : buildHTML_CRDS(crdEntry.data);
+      const crdLabel = crdEntry.tipo === 'CRDB' ? '📦 CRD Bienes' : '🔧 CRD Servicios';
+      document.getElementById('doc-preview').innerHTML = `
+        <div style="display:flex;gap:0;border-bottom:2px solid #1a3a5c;margin-bottom:18px">
+          <button id="prev-tab-op" onclick="switchPreviewTab('op')"
+            style="padding:8px 22px;border:none;background:#1a3a5c;color:#fff;font-weight:700;cursor:pointer;font-size:0.88rem">
+            📋 Orden de Provisión N° ${entry.data.numero}
+          </button>
+          <button id="prev-tab-crd" onclick="switchPreviewTab('crd')"
+            style="padding:8px 22px;border:none;background:#e8f0fe;color:#1a3a5c;font-weight:700;cursor:pointer;font-size:0.88rem">
+            ${crdLabel} N° ${crdEntry.data.numero}
+          </button>
+        </div>
+        <div id="prev-pane-op">${htmlOP}</div>
+        <div id="prev-pane-crd" style="display:none">${htmlCRD}</div>
+      `;
+      document.getElementById('modal-overlay').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      const btnAmbos = document.getElementById('btn-imprimir-ambos');
+      if (btnAmbos) btnAmbos.style.display = 'inline-flex';
+      return;
+    }
+  }
+  let html = '';
+  if (entry.tipo === 'OP') html = buildHTML_OP(entry.data);
+  else if (entry.tipo === 'CRDB') html = buildHTML_CRDB(entry.data);
+  else html = buildHTML_CRDS(entry.data);
+  document.getElementById('doc-preview').innerHTML = html;
+  document.getElementById('modal-overlay').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  const btnAmbos = document.getElementById('btn-imprimir-ambos');
+  if (btnAmbos) btnAmbos.style.display = 'none';
+}
+
+function eliminarDoc(id) {
+  if (!confirm('¿Eliminar este documento del historial?')) return;
+  historial = historial.filter(e => e.id !== id);
+  localStorage.setItem('urxi_historial', JSON.stringify(historial));
+  updateHistorialCount();
+  renderHistorial();
+}
+
+// Close modal on overlay click
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) cerrarModal();
+});
+</script>
+</body>
+</html>
