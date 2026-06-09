@@ -577,7 +577,7 @@
           <div class="form-group">
             <label>Número de Orden <span id="op-num-badge" style="background:#b7860b;color:#fff;font-size:0.65rem;padding:1px 7px;border-radius:10px;font-weight:700;letter-spacing:0.04em;vertical-align:middle">AUTO</span></label>
             <div style="display:flex;gap:6px;align-items:center">
-              <input type="number" id="op-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1" title="Generado automáticamente. Podés modificarlo si es necesario." onchange="this.dataset.manualOverride=1;document.getElementById('op-num-badge').textContent='MANUAL';document.getElementById('op-num-badge').style.background='#8b1a1a'">
+              <input type="text" id="op-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1;font-family:monospace;letter-spacing:0.04em" title="Generado automáticamente (N°-Año). Podés modificarlo si es necesario." placeholder="107-2026" onchange="this.dataset.manualOverride=1;document.getElementById('op-num-badge').textContent='MANUAL';document.getElementById('op-num-badge').style.background='#8b1a1a'">
               <button type="button" title="Restablecer numeración automática" onclick="resetNumero('OP')" style="background:transparent;border:1px solid #b7860b;color:#b7860b;border-radius:3px;padding:5px 8px;cursor:pointer;font-size:0.75rem">↺</button>
             </div>
           </div>
@@ -685,7 +685,7 @@
           <div class="form-group">
             <label>Número de Certificado <span id="crdb-num-badge" style="background:#b7860b;color:#fff;font-size:0.65rem;padding:1px 7px;border-radius:10px;font-weight:700;letter-spacing:0.04em;vertical-align:middle">AUTO</span></label>
             <div style="display:flex;gap:6px;align-items:center">
-              <input type="number" id="crdb-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1" title="Generado automáticamente." onchange="this.dataset.manualOverride=1;document.getElementById('crdb-num-badge').textContent='MANUAL';document.getElementById('crdb-num-badge').style.background='#8b1a1a'">
+              <input type="text" id="crdb-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1;font-family:monospace;letter-spacing:0.04em" title="Generado automáticamente (N°-Año)." placeholder="143-2026" onchange="this.dataset.manualOverride=1;document.getElementById('crdb-num-badge').textContent='MANUAL';document.getElementById('crdb-num-badge').style.background='#8b1a1a';syncCRDNumero('CRDB',this.value)">
               <button type="button" onclick="resetNumero('CRDB')" style="background:transparent;border:1px solid #b7860b;color:#b7860b;border-radius:3px;padding:5px 8px;cursor:pointer;font-size:0.75rem">↺</button>
             </div>
           </div>
@@ -757,7 +757,7 @@
           <div class="form-group">
             <label>Número de Certificado <span id="crds-num-badge" style="background:#b7860b;color:#fff;font-size:0.65rem;padding:1px 7px;border-radius:10px;font-weight:700;letter-spacing:0.04em;vertical-align:middle">AUTO</span></label>
             <div style="display:flex;gap:6px;align-items:center">
-              <input type="number" id="crds-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1" title="Generado automáticamente." onchange="this.dataset.manualOverride=1;document.getElementById('crds-num-badge').textContent='MANUAL';document.getElementById('crds-num-badge').style.background='#8b1a1a'">
+              <input type="text" id="crds-numero" style="font-weight:700;color:#1a3a5c;background:#eef4ff;flex:1;font-family:monospace;letter-spacing:0.04em" title="Generado automáticamente (N°-Año)." placeholder="143-2026" onchange="this.dataset.manualOverride=1;document.getElementById('crds-num-badge').textContent='MANUAL';document.getElementById('crds-num-badge').style.background='#8b1a1a';syncCRDNumero('CRDS',this.value)">
               <button type="button" onclick="resetNumero('CRDS')" style="background:transparent;border:1px solid #b7860b;color:#b7860b;border-radius:3px;padding:5px 8px;cursor:pointer;font-size:0.75rem">↺</button>
             </div>
           </div>
@@ -800,9 +800,8 @@
           <table class="items-table">
             <thead>
               <tr>
-                <th style="width:35%">Descripción del Servicio</th>
-                <th class="col-fecha">Período desde</th>
-                <th class="col-fecha">Período hasta</th>
+                <th style="width:38%">Descripción del Servicio</th>
+                <th class="col-fecha" style="width:140px">Período (mes y año)</th>
                 <th class="col-fecha">Fecha Ord. Prov.</th>
                 <th class="col-precio">Precio $</th>
                 <th class="col-total">Total $</th>
@@ -842,9 +841,18 @@
   <!-- PROVEEDORES -->
   <section id="sec-proveedores" class="section">
     <div class="card">
-      <div class="card-title"><span>☷</span> Listado de Proveedores</div>
+      <div class="card-title" style="justify-content:space-between">
+        <span><span>☷</span> Proveedores</span>
+        <button class="btn btn-primary btn-sm" onclick="abrirModalProveedor()">+ Nuevo Proveedor</button>
+      </div>
+      <!-- Search bar -->
+      <div style="margin-bottom:14px">
+        <input type="text" id="prov-buscar" placeholder="🔍 Buscar por nombre, dirección o email..."
+          style="width:100%;border:1px solid var(--gris-borde);border-radius:4px;padding:9px 12px;font-size:0.9rem;font-family:inherit"
+          oninput="filtrarProveedores()">
+      </div>
       <div style="overflow-x:auto">
-        <table class="items-table" id="prov-table">
+        <table class="items-table">
           <thead>
             <tr>
               <th>Nombre</th>
@@ -852,15 +860,57 @@
               <th>Teléfono</th>
               <th>Email</th>
               <th>Subunidad</th>
+              <th style="width:80px;text-align:center">Acciones</th>
             </tr>
           </thead>
           <tbody id="prov-tbody"></tbody>
         </table>
       </div>
+      <p id="prov-count" style="font-size:0.78rem;color:#888;margin-top:8px;text-align:right"></p>
     </div>
   </section>
 
 </main>
+
+<!-- MODAL PROVEEDOR -->
+<div id="modal-proveedor" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;overflow-y:auto;padding:20px">
+  <div style="max-width:560px;margin:40px auto;background:white;border-radius:8px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.3)">
+    <div style="background:var(--azul);padding:14px 20px;display:flex;justify-content:space-between;align-items:center">
+      <span id="modal-prov-title" style="color:white;font-weight:700;font-size:1rem">Nuevo Proveedor</span>
+      <button onclick="cerrarModalProveedor()" style="background:transparent;border:none;color:white;font-size:1.2rem;cursor:pointer">✕</button>
+    </div>
+    <div style="padding:20px">
+      <input type="hidden" id="prov-edit-index">
+      <div class="form-grid cols-2">
+        <div class="form-group form-full">
+          <label>Nombre / Razón Social *</label>
+          <input type="text" id="prov-f-nombre" placeholder="Ej: Ferretería Esperanza">
+        </div>
+        <div class="form-group form-full">
+          <label>Dirección</label>
+          <input type="text" id="prov-f-dir" placeholder="Calle 1234 (Localidad)">
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="text" id="prov-f-tel" placeholder="(03496) 000000">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="prov-f-email" placeholder="email@proveedor.com">
+        </div>
+        <div class="form-group form-full">
+          <label>Sub-unidad habitual (opcional)</label>
+          <input type="text" id="prov-f-sub" list="prov-f-sub-list" placeholder="Seleccionar o escribir..." autocomplete="off">
+          <datalist id="prov-f-sub-list"></datalist>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px">
+        <button class="btn btn-outline" onclick="cerrarModalProveedor()">Cancelar</button>
+        <button class="btn btn-primary" onclick="guardarProveedor()">💾 Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL DUAL (OP + CRD) -->
 <div id="modal-dual" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:1100;overflow-y:auto;padding:20px">
@@ -910,7 +960,7 @@
 
 <script>
 // ==================== DATA ====================
-const PROVEEDORES = [
+const DEFAULT_PROVEEDORES = [
   {nombre:"A-F Electricidad", dir:"Moreno 3115 (Esperanza)", tel:"", email:"", sub:""},
   {nombre:"Aguas Santafesinas S.A.", dir:"Ituzaingo 1501 (Santa Fe)", tel:"", email:"", sub:""},
   {nombre:"Agustín Darío Singerling", dir:"Ceballos 394 (Esperanza)", tel:"(03496) 525030", email:"jesicametteoda@hotmail.com", sub:""},
@@ -985,48 +1035,108 @@ const SERVICIOS_TIPO = [
   "Servicio telefónico"
 ];
 
+// Proveedores are stored in localStorage so users can add/edit them.
+// On first load we seed from DEFAULT_PROVEEDORES.
+function loadProveedores() {
+  const stored = localStorage.getItem('urxi_proveedores');
+  if (stored) {
+    try { return JSON.parse(stored); } catch(e) {}
+  }
+  // First run: seed from defaults
+  localStorage.setItem('urxi_proveedores', JSON.stringify(DEFAULT_PROVEEDORES));
+  return DEFAULT_PROVEEDORES.slice();
+}
+
+function saveProveedores(arr) {
+  localStorage.setItem('urxi_proveedores', JSON.stringify(arr));
+}
+
+let PROVEEDORES = loadProveedores();
+
 let historial = JSON.parse(localStorage.getItem('urxi_historial') || '[]');
 let tipoActivo = 'OP';
 
 // ==================== COUNTERS ====================
-// Each doc type keeps its own independent counter in localStorage
-function getNextNum(tipo) {
-  const key = 'urxi_counter_' + tipo;
-  // Compute from historial to always stay consistent
-  const usados = historial.filter(e => e.tipo === tipo).map(e => parseInt(e.data.numero)).filter(n => !isNaN(n));
-  const maxUsado = usados.length ? Math.max(...usados) : 0;
-  const stored = parseInt(localStorage.getItem(key) || '0');
-  return Math.max(maxUsado, stored) + 1;
+// Format: "107-2025"  (correlativo por tipo y año fiscal)
+
+function anioFiscal() {
+  return new Date().getFullYear();
 }
 
-function bumpCounter(tipo, numeroUsado) {
-  const key = 'urxi_counter_' + tipo;
+function parsearNumero(str) {
+  // Accepts "107-2025", "107", 107 — returns { seq: 107, anio: 2025 }
+  const s = String(str || '').trim();
+  const m = s.match(/^(\d+)(?:[\-/](\d{4}))?$/);
+  if (!m) return { seq: 0, anio: anioFiscal() };
+  return { seq: parseInt(m[1]) || 0, anio: parseInt(m[2]) || anioFiscal() };
+}
+
+function formatNumero(seq, anio) {
+  return seq + '-' + (anio || anioFiscal());
+}
+
+// CRDB and CRDS share the same CRD counter key
+function crdCounterKey(tipo, anio) {
+  const base = (tipo === 'CRDB' || tipo === 'CRDS') ? 'CRD' : tipo;
+  return 'urxi_counter_' + base + '_' + anio;
+}
+
+function getNextNum(tipo) {
+  const anio = anioFiscal();
+  const key = crdCounterKey(tipo, anio);
+  // Scan historial: both CRDB and CRDS share the CRD sequence
+  const tiposToScan = (tipo === 'CRDB' || tipo === 'CRDS') ? ['CRDB','CRDS'] : [tipo];
+  const usados = historial
+    .filter(e => tiposToScan.includes(e.tipo))
+    .map(e => parsearNumero(e.data.numero))
+    .filter(p => p.anio === anio)
+    .map(p => p.seq);
+  const maxUsado = usados.length ? Math.max(...usados) : 0;
+  const stored = parseInt(localStorage.getItem(key) || '0');
+  const seq = Math.max(maxUsado, stored) + 1;
+  return formatNumero(seq, anio);
+}
+
+function bumpCounter(tipo, numeroStr) {
+  const { seq, anio } = parsearNumero(numeroStr);
+  const key = crdCounterKey(tipo, anio);
   const actual = parseInt(localStorage.getItem(key) || '0');
-  const nuevo = Math.max(actual, parseInt(numeroUsado) || 0);
-  localStorage.setItem(key, nuevo);
+  localStorage.setItem(key, Math.max(actual, seq));
+}
+
+function syncCRDNumero(source, val) {
+  // When CRDB or CRDS number is manually changed, mirror to the other CRD field
+  const mirror = source === 'CRDB' ? 'crds-numero' : 'crdb-numero';
+  const mirrorBadge = source === 'CRDB' ? 'crds-num-badge' : 'crdb-num-badge';
+  const el = document.getElementById(mirror);
+  const badge = document.getElementById(mirrorBadge);
+  if (el) { el.value = val; el.dataset.manualOverride = 1; }
+  if (badge) { badge.textContent = 'MANUAL'; badge.style.background = '#8b1a1a'; }
 }
 
 function resetNumero(tipo) {
   const ids = { OP: 'op-numero', CRDB: 'crdb-numero', CRDS: 'crds-numero' };
   const badges = { OP: 'op-num-badge', CRDB: 'crdb-num-badge', CRDS: 'crds-num-badge' };
-  const el = document.getElementById(ids[tipo]);
-  const badge = document.getElementById(badges[tipo]);
-  if (el) {
-    delete el.dataset.manualOverride;
-    el.value = getNextNum(tipo);
-  }
-  if (badge) {
-    badge.textContent = 'AUTO';
-    badge.style.background = '#b7860b';
-  }
+  const nextNum = getNextNum(tipo);
+  // Update both CRD fields with the same next number (they share the counter)
+  const toUpdate = (tipo === 'CRDB' || tipo === 'CRDS') ? ['CRDB','CRDS'] : [tipo];
+  toUpdate.forEach(t => {
+    const el = document.getElementById(ids[t]);
+    const badge = document.getElementById(badges[t]);
+    if (el) { delete el.dataset.manualOverride; el.value = nextNum; }
+    if (badge) { badge.textContent = 'AUTO'; badge.style.background = '#b7860b'; }
+  });
 }
 
 function setNumeroField(tipo) {
   const ids = { OP: 'op-numero', CRDB: 'crdb-numero', CRDS: 'crds-numero' };
-  const el = document.getElementById(ids[tipo]);
-  if (el && !el.dataset.manualOverride) {
-    el.value = getNextNum(tipo);
-  }
+  const nextNum = getNextNum(tipo);
+  // Both CRD fields always show the same next number
+  const toUpdate = (tipo === 'CRDB' || tipo === 'CRDS') ? ['CRDB','CRDS'] : [tipo];
+  toUpdate.forEach(t => {
+    const el = document.getElementById(ids[t]);
+    if (el && !el.dataset.manualOverride) el.value = nextNum;
+  });
 }
 
 // ==================== INIT ====================
@@ -1063,13 +1173,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function fillSelect(id) {
   const sel = document.getElementById(id);
-  PROVEEDORES.sort((a,b) => a.nombre.localeCompare(b.nombre));
-  PROVEEDORES.forEach(p => {
+  if (!sel) return;
+  const prev = sel.value;
+  // Clear all except placeholder
+  while (sel.options.length > 1) sel.remove(1);
+  [...PROVEEDORES].sort((a,b) => a.nombre.localeCompare(b.nombre)).forEach(p => {
     const opt = document.createElement('option');
     opt.value = p.nombre;
     opt.textContent = p.nombre;
     sel.appendChild(opt);
   });
+  // Restore previous selection if still valid
+  if (prev) sel.value = prev;
+}
+
+function refreshAllSelects() {
+  ['op-proveedor','crdb-proveedor','crds-proveedor'].forEach(fillSelect);
 }
 
 function fillSubunidades(inputId) {
@@ -1096,13 +1215,110 @@ function fillSubunidades(inputId) {
   }
 }
 
-function fillProveedoresTable() {
+function fillProveedoresTable(filtro) {
   const tbody = document.getElementById('prov-tbody');
-  PROVEEDORES.forEach(p => {
+  tbody.innerHTML = '';
+  const q = (filtro || '').toLowerCase();
+  const lista = [...PROVEEDORES].sort((a,b) => a.nombre.localeCompare(b.nombre));
+  const visible = q ? lista.filter(p =>
+    p.nombre.toLowerCase().includes(q) ||
+    (p.dir||'').toLowerCase().includes(q) ||
+    (p.email||'').toLowerCase().includes(q)
+  ) : lista;
+
+  visible.forEach((p, i) => {
+    const realIdx = PROVEEDORES.indexOf(p);
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${p.nombre}</td><td>${p.dir}</td><td>${p.tel}</td><td><small>${p.email}</small></td><td>${p.sub}</td>`;
+    tr.innerHTML = `
+      <td><strong>${p.nombre}</strong></td>
+      <td>${p.dir||''}</td>
+      <td>${p.tel||''}</td>
+      <td><small>${p.email||''}</small></td>
+      <td>${p.sub||''}</td>
+      <td style="text-align:center;white-space:nowrap">
+        <button class="btn btn-outline btn-sm" style="padding:3px 9px;font-size:0.75rem" onclick="editarProveedor(${realIdx})">✏</button>
+        <button class="btn btn-danger" style="margin-left:4px" onclick="eliminarProveedor(${realIdx})">✕</button>
+      </td>`;
     tbody.appendChild(tr);
   });
+
+  const countEl = document.getElementById('prov-count');
+  if (countEl) countEl.textContent = visible.length + ' de ' + lista.length + ' proveedores';
+}
+
+function filtrarProveedores() {
+  const q = document.getElementById('prov-buscar').value;
+  fillProveedoresTable(q);
+}
+
+// ==================== PROVEEDOR CRUD ====================
+let proveedorEditIdx = -1;
+
+function abrirModalProveedor(idx) {
+  proveedorEditIdx = (idx !== undefined) ? idx : -1;
+  const titleEl = document.getElementById('modal-prov-title');
+  if (proveedorEditIdx >= 0) {
+    const p = PROVEEDORES[proveedorEditIdx];
+    titleEl.textContent = 'Editar Proveedor';
+    document.getElementById('prov-f-nombre').value = p.nombre || '';
+    document.getElementById('prov-f-dir').value    = p.dir    || '';
+    document.getElementById('prov-f-tel').value    = p.tel    || '';
+    document.getElementById('prov-f-email').value  = p.email  || '';
+    document.getElementById('prov-f-sub').value    = p.sub    || '';
+  } else {
+    titleEl.textContent = 'Nuevo Proveedor';
+    ['prov-f-nombre','prov-f-dir','prov-f-tel','prov-f-email','prov-f-sub'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+  }
+  // Populate subunidades datalist in modal
+  const dl = document.getElementById('prov-f-sub-list');
+  dl.innerHTML = '';
+  SUBUNIDADES.forEach(s => {
+    const opt = document.createElement('option'); opt.value = s; dl.appendChild(opt);
+  });
+  document.getElementById('modal-proveedor').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('prov-f-nombre').focus(), 100);
+}
+
+function cerrarModalProveedor() {
+  document.getElementById('modal-proveedor').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function guardarProveedor() {
+  const nombre = document.getElementById('prov-f-nombre').value.trim();
+  if (!nombre) { alert('El nombre del proveedor es obligatorio.'); return; }
+  const p = {
+    nombre,
+    dir:   document.getElementById('prov-f-dir').value.trim(),
+    tel:   document.getElementById('prov-f-tel').value.trim(),
+    email: document.getElementById('prov-f-email').value.trim(),
+    sub:   document.getElementById('prov-f-sub').value.trim()
+  };
+  if (proveedorEditIdx >= 0) {
+    PROVEEDORES[proveedorEditIdx] = p;
+  } else {
+    PROVEEDORES.push(p);
+  }
+  saveProveedores(PROVEEDORES);
+  refreshAllSelects();
+  cerrarModalProveedor();
+  fillProveedoresTable(document.getElementById('prov-buscar').value);
+}
+
+function editarProveedor(idx) {
+  abrirModalProveedor(idx);
+}
+
+function eliminarProveedor(idx) {
+  const p = PROVEEDORES[idx];
+  if (!confirm(`¿Eliminar a "${p.nombre}" del listado?`)) return;
+  PROVEEDORES.splice(idx, 1);
+  saveProveedores(PROVEEDORES);
+  refreshAllSelects();
+  fillProveedoresTable(document.getElementById('prov-buscar').value);
 }
 
 // ==================== TABS ====================
@@ -1128,6 +1344,7 @@ function selectTipo(tipo) {
 
 // ==================== PROVEEDORES AUTO-FILL ====================
 function getProveedor(nombre) {
+  // Always search the current (possibly edited) PROVEEDORES list
   return PROVEEDORES.find(p => p.nombre === nombre) || {};
 }
 
@@ -1227,10 +1444,32 @@ function calcCRDB() {
 // ==================== ITEMS CRDS ====================
 let crdsItemCount = 0;
 
+// Month names in Spanish for the periodo selector
+const MESES_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                  'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
+function buildMesesOptions(selectedMes, selectedAnio) {
+  const anioActual = new Date().getFullYear();
+  const anios = [anioActual - 1, anioActual, anioActual + 1];
+  let opts = '';
+  anios.forEach(a => {
+    MESES_ES.forEach((m, i) => {
+      const val = `${String(i+1).padStart(2,'0')}-${a}`;
+      const label = `${m} ${a}`;
+      const sel = (String(i+1).padStart(2,'0') === selectedMes && String(a) === String(selectedAnio)) ? 'selected' : '';
+      opts += `<option value="${val}" ${sel}>${label}</option>`;
+    });
+  });
+  return opts;
+}
+
 function addItemCRDS() {
   crdsItemCount++;
   const id = crdsItemCount;
-  const hoy = new Date().toISOString().split('T')[0];
+  const hoy = new Date();
+  const mesActual = String(hoy.getMonth()+1).padStart(2,'0');
+  const anioActual = hoy.getFullYear();
+  const fechaHoy = hoy.toISOString().split('T')[0];
   const tbody = document.getElementById('crds-items-body');
   const tr = document.createElement('tr');
   tr.id = 'crds-row-' + id;
@@ -1241,9 +1480,12 @@ function addItemCRDS() {
         <option value="otro">— Otro —</option>
       </select>
     </td>
-    <td class="col-fecha"><input type="date" value="${hoy.slice(0,7)+'-01'}"></td>
-    <td class="col-fecha"><input type="date" value="${hoy}"></td>
-    <td class="col-fecha"><input type="date" value="${hoy}"></td>
+    <td>
+      <select class="crds-periodo" style="width:100%;border:1px solid #ddd;border-radius:3px;padding:5px 7px;font-size:0.87rem;font-weight:600;color:#1a3a5c">
+        ${buildMesesOptions(mesActual, anioActual)}
+      </select>
+    </td>
+    <td class="col-fecha"><input type="date" value="${fechaHoy}"></td>
     <td class="col-precio"><input type="number" min="0" step="any" value="0" onchange="calcCRDS()" oninput="calcCRDS()"></td>
     <td class="col-total" id="crds-sub-${id}">$ 0,00</td>
     <td class="col-accion"><button class="btn btn-danger" onclick="removeRow('crds-row-${id}', calcCRDS)">✕</button></td>
@@ -1353,21 +1595,31 @@ function collectDataCRDB() {
   };
 }
 
+function periodoLabel(val) {
+  // val = "05-2026" → "Mayo 2026"
+  if (!val) return '';
+  const [mm, yyyy] = val.split('-');
+  const idx = parseInt(mm) - 1;
+  return MESES_ES[idx] + ' ' + yyyy;
+}
+
 function collectDataCRDS() {
   const items = [];
   let total = 0;
   document.querySelectorAll('#crds-items-body tr').forEach(tr => {
-    const sel = tr.querySelector('select');
-    const dates = tr.querySelectorAll('input[type=date]');
+    const selects = tr.querySelectorAll('select');
+    const descSel = selects[0];   // service type select
+    const periodoSel = selects[1]; // month/year select
+    const dateInput = tr.querySelector('input[type=date]');
     const num = tr.querySelector('input[type=number]');
-    if (sel && dates.length >= 3 && num) {
-      const desc = sel.value;
-      const desde = dates[0].value;
-      const hasta = dates[1].value;
-      const fechaop = dates[2].value;
+    if (descSel && periodoSel && num) {
+      const desc = descSel.value;
+      const periodo = periodoSel.value;        // "05-2026"
+      const periodoStr = periodoLabel(periodo); // "Mayo 2026"
+      const fechaop = dateInput ? dateInput.value : '';
       const precio = parseFloat(num.value) || 0;
       total += precio;
-      if (precio > 0 || desc) items.push({desc, desde, hasta, fechaop, precio});
+      if (precio > 0 || desc) items.push({desc, periodo, periodoStr, fechaop, precio});
     }
   });
   return {
@@ -1440,7 +1692,7 @@ function buildHTML_OP(d) {
       ${d.obs ? `<p><b>Obs.:</b> ${d.obs}</p>` : ''}
     </div>
     <div style="display:flex;justify-content:flex-end;margin-top:28px">
-      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;min-width:180px;font-size:8.5pt">
+      <div style="text-align:center;padding-top:28px;min-width:180px;font-size:8.5pt">
         Firma y sello<br>U.R. XI — Las Colonias
       </div>
     </div>
@@ -1501,9 +1753,9 @@ function buildHTML_CRDB(d) {
       </tfoot>
     </table>
     <div style="display:flex;justify-content:space-between;margin-top:40px;gap:20px">
-      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Firma y sello del Proveedor</div>
-      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Firma y sello<br>Receptor del Organismo</div>
-      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Autorización<br>U.R. XI — Las Colonias</div>
+      <div style="text-align:center;padding-top:28px;flex:1;font-size:8.5pt">Firma y sello del Proveedor</div>
+      <div style="text-align:center;padding-top:28px;flex:1;font-size:8.5pt">Firma y sello<br>Receptor del Organismo</div>
+      <div style="text-align:center;padding-top:28px;flex:1;font-size:8.5pt">Autorización<br>U.R. XI — Las Colonias</div>
     </div>
   `;
 }
@@ -1512,8 +1764,7 @@ function buildHTML_CRDS(d) {
   const rows = d.items.map(i => `
     <tr>
       <td>${i.desc}</td>
-      <td style="text-align:center">${formatFecha(i.desde)}</td>
-      <td style="text-align:center">${formatFecha(i.hasta)}</td>
+      <td style="text-align:center;font-weight:600">${i.periodoStr || i.periodo || ''}</td>
       <td style="text-align:center">${formatFecha(i.fechaop)}</td>
       <td style="text-align:right">${formatPeso(i.precio)}</td>
       <td style="text-align:right">${formatPeso(i.precio)}</td>
@@ -1543,8 +1794,7 @@ function buildHTML_CRDS(d) {
       <thead>
         <tr style="background:#1a3a5c;color:white">
           <th style="padding:6px 8px;text-align:left">Descripción</th>
-          <th style="padding:6px 8px;text-align:center;width:90px">Período desde</th>
-          <th style="padding:6px 8px;text-align:center;width:90px">Período hasta</th>
+          <th style="padding:6px 8px;text-align:center;width:130px">Período</th>
           <th style="padding:6px 8px;text-align:center;width:100px">Fecha Ord. Prov.</th>
           <th style="padding:6px 8px;text-align:right;width:90px">Precio</th>
           <th style="padding:6px 8px;text-align:right;width:90px">Total</th>
@@ -1553,16 +1803,16 @@ function buildHTML_CRDS(d) {
       <tbody>${rows}</tbody>
       <tfoot>
         <tr style="background:#1a3a5c;color:white">
-          <td colspan="5" style="padding:7px 8px;text-align:right;font-weight:bold;font-size:8.5pt;letter-spacing:1px">TOTAL</td>
+          <td colspan="4" style="padding:7px 8px;text-align:right;font-weight:bold;font-size:8.5pt;letter-spacing:1px">TOTAL</td>
           <td style="padding:7px 8px;text-align:right;font-weight:bold">${formatPeso(d.total)}</td>
         </tr>
       </tfoot>
     </table>
     ${d.obs ? `<p style="font-size:9pt"><b>Observaciones:</b> ${d.obs}</p>` : ''}
     <div style="display:flex;justify-content:space-between;margin-top:40px;gap:20px">
-      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Firma y sello del Proveedor</div>
-      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Firma y sello<br>Receptor del Organismo</div>
-      <div style="text-align:center;padding-top:28px;border-top:1.5px solid #333;flex:1;font-size:8.5pt">Autorización<br>U.R. XI — Las Colonias</div>
+      <div style="text-align:center;padding-top:28px;flex:1;font-size:8.5pt">Firma y sello del Proveedor</div>
+      <div style="text-align:center;padding-top:28px;flex:1;font-size:8.5pt">Firma y sello<br>Receptor del Organismo</div>
+      <div style="text-align:center;padding-top:28px;flex:1;font-size:8.5pt">Autorización<br>U.R. XI — Las Colonias</div>
     </div>
   `;
 }
@@ -1649,7 +1899,7 @@ function _saveEntry(tipo, data) {
 
 // Build CRD data object from OP data (no DOM needed)
 function buildCRDDataFromOP(opData, crdTipo) {
-  const crdNum = getNextNum(crdTipo);
+  const crdNum = getNextNum(crdTipo);  // e.g. "143-2025"
   const hoy = new Date().toISOString().split('T')[0];
 
   if (crdTipo === 'CRDB') {
@@ -1673,14 +1923,19 @@ function buildCRDDataFromOP(opData, crdTipo) {
       _opNumero: opData.numero  // link back
     };
   } else {
-    // CRD Servicios — one row per OP item, period defaults to month of OP
-    const mesInicio = opData.fecha ? opData.fecha.slice(0,7) + '-01' : hoy;
+    // CRD Servicios — one row per OP item, period = month of OP date
+    const opMes = opData.fecha ? opData.fecha.slice(5,7) : String(new Date().getMonth()+1).padStart(2,'0');
+    const opAnio = opData.fecha ? opData.fecha.slice(0,4) : String(new Date().getFullYear());
+    const periodo = opMes + '-' + opAnio;
+    const mesNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                      'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const periodoStr = mesNames[parseInt(opMes)-1] + ' ' + opAnio;
     const items = opData.items.map(i => ({
       desc: i.desc,
-      desde: mesInicio,
-      hasta: opData.fecha || hoy,
+      periodo,
+      periodoStr,
       fechaop: opData.fecha || hoy,
-      precio: i.sub   // total por ítem como precio del servicio
+      precio: i.sub
     }));
     return {
       numero: String(crdNum),
@@ -1784,8 +2039,10 @@ function mostrarPreviewOpYCrd(opData, crdObj, crdTipo) {
       <div id="prev-pane-crd" style="display:none">${htmlCRD}</div>
     `;
     // Fix CRD tab numero display
-    const crdNum = getNextNum(crdTipo) - 1;
-    document.getElementById('prev-tab-crd').textContent = (crdTipo === 'CRDB' ? '📦' : '🔧') + ` CRD ${crdTipo === 'CRDB' ? 'Bienes' : 'Servicios'} N° ${crdNum}`;
+    // The CRD was already saved; find its number from the freshly saved entry
+    const savedCRD = historial.find(e => e.linkedOP !== undefined && e.tipo === crdTipo);
+    const crdNumDisplay = savedCRD ? savedCRD.data.numero : buildCRDDataFromOP(opData, crdTipo).numero;
+    document.getElementById('prev-tab-crd').textContent = (crdTipo === 'CRDB' ? '📦' : '🔧') + ` CRD ${crdTipo === 'CRDB' ? 'Bienes' : 'Servicios'} N° ${crdNumDisplay}`;
   } else {
     preview.innerHTML = htmlOP;
   }
@@ -1892,9 +2149,13 @@ function eliminarDoc(id) {
   renderHistorial();
 }
 
-// Close modal on overlay click
+// Close modals on overlay click
 document.getElementById('modal-overlay').addEventListener('click', function(e) {
   if (e.target === this) cerrarModal();
+});
+
+document.getElementById('modal-proveedor').addEventListener('click', function(e) {
+  if (e.target === this) cerrarModalProveedor();
 });
 </script>
 </body>
